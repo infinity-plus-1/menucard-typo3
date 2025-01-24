@@ -1,0 +1,27 @@
+<html
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <h5>
+        <strong>
+            <be:link.editRecord uid="{data.uid}" table="{data.mainType}">{data.header}</be:link.editRecord>
+        </strong>
+    </h5>
+</f:section>
+
+<f:section name="Content">
+    {data.bodytext -> f:sanitize.html()}
+    <p>Button text: {data.defaultButtonText}</p>
+    <f:image image="{data.image.0}" maxWidth="150" />
+</f:section>
+
+<f:comment>
+<!-- Uncomment to override preview footer -->
+<f:section name="Footer">
+    My custom Footer
+</f:section>
+</f:comment>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="labels.xlf" source-language="en" date="2025-01-12T02:42:00+00:00" product-name="menucard/hero">
+		<header/>
+		<body>
+			<trans-unit id="title">
+				<source>Hero</source>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Create a hero element with a screen-wide image, a header and an optional subtext</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

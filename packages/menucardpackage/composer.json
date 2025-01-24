@@ -1,0 +1,23 @@
+{
+    "name": "menucardvendor/menucardpackage",
+    "type": "typo3-cms-extension",
+    "description": "Standard extension for the menucard website",
+    "license": "GPL-2.0-or-later",
+    "authors": [{
+		"name": "Dennis Schwab",
+		"email": "dennis.schwab90@icloud.com"
+	}],
+    "require": {
+        "typo3/cms-core": "^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "menucardvendor\\menucardpackage\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "menucardpackage"
+        }
+    }
+}

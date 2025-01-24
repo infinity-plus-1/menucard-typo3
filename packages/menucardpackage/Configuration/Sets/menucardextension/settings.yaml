@@ -1,0 +1,7 @@
+styles:
+  content:
+    textmedia:
+      linkWrap:
+        lightboxEnabled: true
+        lightboxCssClass: glightbox
+        lightboxRelAttribute: 'lightbox[{field:uid}]'

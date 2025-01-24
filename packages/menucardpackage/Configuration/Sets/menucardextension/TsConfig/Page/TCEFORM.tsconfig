@@ -1,0 +1,15 @@
+TCEFORM {
+    tt_content {
+        layout {
+            addItems {
+                4 = FadeIn
+
+            }
+        }
+        frame_class {
+            addItems {
+                fade-out = FadeOut
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+page = PAGE
+
+/*lib.testFluid = COA
+lib.testFluid {
+    wrap = <div>|</div>
+    10 = TEXT
+    10.field = lib.test3.renderObj.10
+    10.wrap = <b>|</b>
+    20 = TEXT
+    20.field = content
+}*/
+
+page {
+
+    bodyTagCObject = TEXT
+    bodyTagCObject.dataWrap = <body id="uid_{field : uid}" class="pid_{field : pid}"> | </body>
+    
+    10 = PAGEVIEW
+    10 {
+
+        paths {
+            100 = EXT:menucardpackage/Resources/Private/Templates/
+        }
+
+        variables {
+
+            /*test = CONTENT
+            test {
+                table = tt_content
+                select.where = layout = 4
+                /*renderObj = COA
+                renderObj {
+                    10 = TEXT
+                    
+                }*/
+                # renderObj = < tt_content
+                /*wrap = <div class="test1">|</div>
+                
+            }*/
+
+            /** Column 0 content **/
+            content0 = CONTENT
+            content0 {
+                table = tt_content
+                select {
+                    where = colPos = 0
+                    orderBy = sorting
+                }
+            }
+
+            /** Column 1 content **/
+
+            content1 < .content0
+            content1.select.where = colPos = 1
+
+            content2 < .content0
+            content2.select.where = colPos = 2
+            content2.slide = -1
+
+            content3 < .content0
+            content3.select.where = colPos = 3
+            content3.slide = -1
+
+            content4 < .content0
+            content4.select.where = colPos = 4
+            content4.slide = -1
+
+            /** Website icon **/
+
+            siteIcon = IMAGE
+            siteIcon {
+                file = EXT:menucardpackage/Resources/Public/images/menucard_icon.png
+                params = id="site-icon"
+            }
+        }
+
+
+
+    }
+}

@@ -1,0 +1,4 @@
+lib.contentBlock < lib.contentElement
+lib.contentBlock.templateRootPaths >
+lib.contentBlock.templateName >
+lib.contentBlock.dataProcessing.10 = content-blocks

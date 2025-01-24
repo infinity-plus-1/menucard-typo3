@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+        <f:link.typolink parameter="/">
+            {siteIcon -> f:format.raw()}
+        </f:link.typolink>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <f:for each="{navbar}" as="page">
+                    <f:render section="navbarLiElement" arguments="{_all}" />
+                    <f:if condition="{page.hasSubpages}">
+                        <f:render section="navbarSubList" arguments="{_all}" />
+                    </f:if>
+                </f:for>
+                <f:if condition="{settings.menucardextension.contactButtonText} && {settings.menucardextension.contactButtonValue}">
+                    <li id="contactButton">
+                        <f:link.typolink parameter="{settings.menucardextension.contactButtonValue}" class="btn btn-primary">
+                            {settings.menucardextension.contactButtonText}
+                        </f:link.typolink>
+                    </li>
+                    
+                </f:if>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+    </div>
+
+    <f:section name="navbarLiElement">
+        <li {f:if(condition: page.hasSubpages, then: 'class="dropdown"')}>
+            <f:link.typolink parameter="{page.data.uid}" class="{f:if(condition: page.active, then: 'active')}">
+                {f:if(condition: page.hasSubpages, then: '<span>')}
+                    {page.title}
+                {f:if(condition: page.hasSubpages, then: '</span> <i class="bi bi-chevron-down toggle-dropdown"></i>')}
+        </f:link.typolink>
+    </f:section>
+
+    <f:section name="navbarSubList">
+        <f:for each="{page.children}" as="page">
+            <ul>
+                <f:render section="navbarLiElement" arguments="{_all}" />
+                <f:if condition="{page.hasSubpages}">
+                    <f:render section="navbarSubList" arguments="{_all}" />
+                </f:if>    
+                </li>
+            </ul>
+        </f:for>
+    </f:section>
+
+</f:spaceless>
+</html>

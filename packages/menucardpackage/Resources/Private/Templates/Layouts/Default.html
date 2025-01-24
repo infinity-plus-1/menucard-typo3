@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <f:render partial="Navbar" arguments="{_all}" />
+
+    <f:render partial="Breadcrumb" arguments="{_all}" />
+    <a href="#top" id="scrollToTopButton" class="d-none">
+        <svg viewBox="0 0 200 200" width="100"  height="100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 100 100 40 150 100" style="fill:none; stroke: white; stroke-width: 10;"/>
+            <path d="M 100 40 100 150" style="fill:none; stroke: white; stroke-width: 10;"/>
+        </svg>
+    </a>
+    <f:render section="Main" />
+
+    <f:render partial="Footer" arguments="{_all}" />
+</f:spaceless>
+</html>

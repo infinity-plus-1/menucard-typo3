@@ -1,0 +1,116 @@
+name: menucard/hero
+typeName: menucard_hero
+group: default
+prefixFields: false
+prefixType: full
+fields:
+  - identifier: hero_header_palette
+    type: Palette
+    description: Define and alter the header for the hero section
+    fields:
+      - identifier: header
+        useExistingField: true
+        type: Text
+        required: true
+        description: The header for the hero element
+      - type: Linebreak
+      - identifier: header_size
+        type: Select
+        renderType: selectSingle
+        description: Select the size of the header text
+        default: h2
+        items:
+          - label: 'Very large'
+            value: h1
+          - label: 'Large'
+            value: h2
+          - label: 'Medium'
+            value: h3
+          - label: 'Small'
+            value: h4
+          - label: 'Very small'
+            value: h5
+      - identifier: header_position
+        type: Select
+        renderType: selectSingle
+        description: Align the position of the header text
+        items:
+          - label: 'Default'
+            value: 
+          - label: 'Center'
+            value: ce-headline-center
+          - label: 'Right'
+            value: ce-headline-right
+          - label: 'Left'
+            value: ce-headline-left
+  - identifier: image
+    useExistingField: true
+    type: File
+    extendedPalette: false
+    minitems: 1
+    maxitems: 1
+    allowed: common-image-types
+    description: A screen-wide image (limited to one image)
+  - identifier: bodytext
+    useExistingField: true
+    type: Textarea
+    enableRichtext: true
+    description: Inferior hero section text (below the header)
+  - identifier: hero_link_palette
+    type: Palette
+    description: Include a button to the hero element
+    fields:
+      - identifier: defaultButtonText
+        type: Text
+        default: Get in touch
+        description: Set text for the button
+      - identifier: header_link
+        type: Link
+        useExistingField: true
+        allowedTypes:
+          - page
+          - url
+          - file
+  - identifier: hero_aos_palette
+    type: Palette
+    description: Set a scrolling animation for the element
+    fields:
+      - identifier: aos_type
+        type: Select
+        renderType: selectSingle
+        description: Select the scroll animation for the hero element
+        items:
+          - label: 'Default [no animation]'
+            value: 
+          - label: 'Fade'
+            value: fade
+          - label: 'Fade up'
+            value: fade-up
+          - label: 'fade-down'
+            value: fade-down
+          - label: 'Fade left'
+            value: fade-left
+          - label: 'Fade right'
+            value: fade-right
+          - label: 'Flip up'
+            value: flip-up
+          - label: 'Flip down'
+            value: flip-down
+          - label: 'Flip left'
+            value: flip-left
+          - label: 'Flip right'
+            value: flip-right
+          - label: 'Slide up'
+            value: slide-up
+          - label: 'Slide down'
+            value: slide-down
+          - label: 'Slide left'
+            value: slide-left
+          - label: 'Slide right'
+            value: slide-right
+      - type: Linebreak
+      - identifier: aos_animation_duration
+        type: Text
+        required: true
+        description: The header for the hero element
+        default: 100

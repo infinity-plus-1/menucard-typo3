@@ -1,0 +1,68 @@
+page.10.dataProcessing {
+    10 = menu
+    10 {
+        as = navbar
+        expandAll = 1
+        levels = 99
+    }
+
+    20 = menu
+    20 {
+        as = footbar
+        special = directory
+        special.value = {$menucardextension.footerMetaUid}
+        levels = 1
+    }
+
+    30 = menu
+    30 {
+        special = rootline
+        special.range 0|-1
+        as = breadcrumb
+    }
+
+    40 = site
+    40 {
+        as = site
+    }
+
+    50 = site-language
+    50 {
+        as = siteLanguage
+    }
+
+    60 = database-query
+    60 {
+        table = tt_content
+        as = images
+        // recursively process the images in the records with the FilesProcessor
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references {
+                    table = tt_content
+                    fieldName = image
+                }
+            }
+
+            20 = TYPO3\CMS\Frontend\DataProcessing\GalleryProcessor
+            20 {
+                as = imagesProcessed
+                rendering {
+                    image = IMAGE
+                    image {
+                        file {
+                            import.data = file:current:publicUrl
+                        }
+                        file.width = 300c
+                        file.height = 500c
+                        altText.data = Dies ist ein Testalt!
+                        titleText.data = Ein Testtitel!
+                    }
+                }
+            }
+        }
+    }
+
+    70 = page-content
+}

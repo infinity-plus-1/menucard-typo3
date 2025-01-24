@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="labels.xlf" source-language="en" date="2025-01-16T02:48:32+00:00" product-name="menucard/food-menu">
+		<header/>
+		<body>
+			<trans-unit id="title">
+				<source>Food Menu</source>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Description for Content Element menucard/food-menu</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

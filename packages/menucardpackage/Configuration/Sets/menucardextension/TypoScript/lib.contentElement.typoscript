@@ -1,0 +1,15 @@
+lib {
+    contentElement {
+        layoutRootPaths {
+            100 = EXT:menucardpackage/Resources/Private/Extensions/fluidStyledContent/Layouts/
+        }
+        partialRootPaths {
+            100 = EXT:menucardpackage/Resources/Private/Extensions/fluidStyledContent/Partials/
+        }
+        settings.media.popup {
+            JSwindow = 0
+            directImageLink = 1
+            linkParams.ATagParams.dataWrap = class="glightbox" rel="lightbox{field:uid}"  title="{file:current:title}" data-gallery="gallery1"
+        }
+    }
+}
