@@ -4,7 +4,7 @@
     <div id="fh5co-featured" data-section="features" class="animated" data-aos="{data.aos_type}" data-aos-duration="{data.aos_animation_duration}">
         <div class="container">
             <fh:set variables="{name: 'Dennis'}"></fh:set>
-            <fh:set variables="{text: 'Hello $name, was geht? Heute ist der $date und wir haben $clock Uhr.'}" mergeFields="{name: '$', date: '24.01.2025', clock: '01:49'}"></fh:set>
+            <fh:set variables="{text: '4+5*(3+5)-21+($num1 / 3)'}" mergeFields="{num1: '33'}" isExpression="true"></fh:set>
             {text}
             <div class="row text-center fh5co-heading row-padded">
                 <div class="col-md-8 col-md-offset-2">

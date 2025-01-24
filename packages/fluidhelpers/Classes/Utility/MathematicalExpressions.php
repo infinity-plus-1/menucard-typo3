@@ -237,6 +237,14 @@ final class MathematicalExpressions
         $expression = str_replace('·', '*', str_replace(':', '/', $expression));
 
         /**
+         * Validate the expression
+         */
+
+        $validate = [];
+        if (preg_match_all("/(\[^0-9()*\-\/+ \])+/", $expression, $validate))
+            throw new MathematicalExpressionsException("Expression contains non-mathematical characters.");
+
+        /**
          * Remove all whitespaces
          */
         $expression = preg_replace('/[ \n\r]+/', '', $expression);

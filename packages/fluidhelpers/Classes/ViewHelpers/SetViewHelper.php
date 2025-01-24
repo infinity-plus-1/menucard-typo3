@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DS\fluidHelpers\ViewHelpers;
 
+use DS\fluidHelpers\Utility\MathematicalExpressions;
 use Exception;
 use TYPO3Fluid\Fluid\Core\Variables\StandardVariableProvider;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -56,12 +57,14 @@ final class SetViewHelper extends AbstractViewHelper
 
     private function _compileExpression($expression, $mergeFields): int|float
     {
-        return 0.0;
+        $expression = $this->_renderString($expression, $mergeFields);
+        $me = new MathematicalExpressions();
+        $value = $me->compileExpression($expression);
+        return str_contains($value, '.') ? floatval($value) : intval($value);
     }
 
     private function _checkAndReturnValue($identifier, $value): mixed
     {
-        
         if ($value === '$')
         {
             $globalVars = $this->renderingContext->getVariableProvider();
@@ -94,7 +97,10 @@ final class SetViewHelper extends AbstractViewHelper
         {
             foreach ($mergeFields as $identifier => $value)
             {
-                
+                if (is_array($value)) $value = json_encode($value);
+                else if(is_numeric($value)) $value = strval($value);
+                else if (is_object($value) && method_exists($value, "__toString")) $value = $value->__toString();
+                else if (is_bool($value)) $value = strval($value);
                 if (is_string($value)) $variable = $this->_injectVariable($variable, $identifier, $this->_checkAndReturnValue($identifier, $value));
             }
         }
