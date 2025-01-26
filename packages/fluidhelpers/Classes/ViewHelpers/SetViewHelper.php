@@ -145,7 +145,7 @@ final class SetViewHelper extends AbstractViewHelper
         }
         
 
-        
+        dump($GLOBALS['TCA']);
         
     }
 }
