@@ -1,9 +1,0 @@
-name: menucard/food-menu
-typeName: menucard_foodmenu
-group: default
-prefixFields: true
-prefixType: full
-fields:
-  -
-    identifier: header
-    useExistingField: true

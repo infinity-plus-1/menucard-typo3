@@ -125,7 +125,6 @@ final class SetViewHelper extends AbstractViewHelper
         $isExpression = $this->arguments['isExpression'];
 
         $globalVars = $this->renderingContext->getVariableProvider();
-        //dd($globalVars);
         foreach ($variables as $key => $variable)
         {
             if ($this->_nameValidator($key))
@@ -143,10 +142,6 @@ final class SetViewHelper extends AbstractViewHelper
             
             $globalVars->add($key, $variable);
         }
-        
-
-        
-        
     }
 }
 

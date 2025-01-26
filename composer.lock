@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2040f72acf724776a70e3fee808e0dc3",
+    "content-hash": "cf3fb46d863c4db27c289646489e1491",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -7791,6 +7791,71 @@
                 }
             ],
             "time": "2024-11-08T15:48:14+00:00"
+        },
+        {
+            "name": "typo3/cms-styleguide",
+            "version": "v13.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TYPO3-CMS/styleguide.git",
+                "reference": "e592612ceaea2876d448afd2af8750920ed58c19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TYPO3-CMS/styleguide/zipball/e592612ceaea2876d448afd2af8750920ed58c19",
+                "reference": "e592612ceaea2876d448afd2af8750920ed58c19",
+                "shasum": ""
+            },
+            "require": {
+                "typo3/cms-core": "13.4.4",
+                "typo3/cms-felogin": "13.4.4",
+                "typo3/cms-fluid-styled-content": "13.4.4",
+                "typo3/cms-form": "13.4.4",
+                "typo3/cms-indexed-search": "13.4.4",
+                "typo3/cms-seo": "13.4.4"
+            },
+            "conflict": {
+                "typo3/cms": "*"
+            },
+            "type": "typo3-cms-framework",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "styleguide"
+                },
+                "branch-alias": {
+                    "dev-main": "13.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\Styleguide\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Core Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 extension to showcase TYPO3 Backend capabilities",
+            "homepage": "https://typo3.org",
+            "keywords": [
+                "style guide",
+                "typo3",
+                "typo3 backend"
+            ],
+            "support": {
+                "chat": "https://typo3.org/help",
+                "docs": "https://docs.typo3.org",
+                "issues": "https://forge.typo3.org",
+                "source": "https://github.com/typo3/typo3"
+            },
+            "time": "2025-01-21T10:23:14+00:00"
         }
     ],
     "aliases": [],

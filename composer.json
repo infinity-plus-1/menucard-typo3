@@ -55,6 +55,7 @@
     },
     "require-dev": {
         "b13/make": "^0.1.8",
-        "symfony/var-dumper": "^7.2"
+        "symfony/var-dumper": "^7.2",
+        "typo3/cms-styleguide": "^13.4"
     }
 }
