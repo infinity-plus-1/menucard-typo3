@@ -3,9 +3,6 @@
     <f:asset.css identifier="main" href="{cb:assetPath()}/main.css"/>
     <div id="fh5co-featured" data-section="features" class="animated" data-aos="{data.aos_type}" data-aos-duration="{data.aos_animation_duration}">
         <div class="container">
-            <fh:set variables="{name: 'Dennis'}"></fh:set>
-            <fh:set variables="{text: '4+5*(3+5)-21+($num1 / 3)'}" mergeFields="{num1: '33'}" isExpression="true"></fh:set>
-            {text}
             <div class="row text-center fh5co-heading row-padded">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="heading to-animate fadeInUp animated">{data.header}</h2>
@@ -15,7 +12,6 @@
             <div class="row">
                 <div class="fh5co-grid">
                     <f:for each="{data.features_grid_collection}" as="item" iteration="itemIterator">
-                        <f:debug>{data.features_grid_collection.{itemIterator.index}}</f:debug>
                         <f:if condition="{itemIterator.isOdd}">
                             <f:then>
                                 <div class="fh5co-v-half">

@@ -1,2 +1,1 @@
 @import "EXT:menucardpackage/Configuration/Sets/menucardextension/TypoScript/*.typoscript"
-@import "EXT:menucardpackage/Configuration/Sets/menucardextension/TypoScript/DataProcessors/*.typoscript"
