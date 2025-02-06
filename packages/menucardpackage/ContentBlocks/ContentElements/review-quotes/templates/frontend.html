@@ -1,0 +1,28 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <f:asset.css identifier="review_quotes_main" href="{cb:assetPath()}/main.css"/>
+    <div id="fh5co-sayings" class="animated">
+        <div class="container">
+            <div class="row to-animate fadeInUp animated">
+                <div class="flexslider">
+                    <div class="flex-viewport" style="overflow: hidden; position: relative; height: 210px;">
+                        <ul class="slides" style="width: 1200%; transition-duration: 0s; transform: translate3d(-3864px, 0px, 0px);">
+                            <f:for each="{data.review_quotes}" as="item" iteration="iterator">
+                                <li
+                                    style="width: 1288px; margin-right: 0px; float: left; display: block;"
+                                    class="{f:if(condition: iterator.isFirst, then: 'flex-active-slide')}"
+                                    aria-hidden="true"
+                                >
+                                    <blockquote>
+                                        <p>“{item.quote}”</p>
+                                        <p class="quote-author">— {item.customer_name}</p>
+                                    </blockquote>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:spaceless>

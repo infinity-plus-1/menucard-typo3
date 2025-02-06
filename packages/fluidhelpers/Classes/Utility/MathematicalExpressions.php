@@ -65,6 +65,12 @@ final class MathematicalExpressions
                     array_splice($this->operators, $i, 1);
                     $i--;
                     break;
+                case '%':
+                    $this->numbers[$i] %= $this->numbers[$i+1];
+                    array_splice($this->numbers, ($i+1), 1);
+                    array_splice($this->operators, $i, 1);
+                    $i--;
+                    break;
                 case '+':
                 case '-':
                     break;
@@ -160,6 +166,10 @@ final class MathematicalExpressions
                     $this->_setCurrentNumber($currentNumber, $numberPrefix, $decimalPointFound, $decimalRadix);
                     $this->operators[] = '/';
                     break;
+                case '%':
+                    $this->_setCurrentNumber($currentNumber, $numberPrefix, $decimalPointFound, $decimalRadix);
+                    $this->operators[] = '%';
+                    break;
                 default:
                     if (is_numeric($expression[$i]))
                     {
@@ -241,7 +251,7 @@ final class MathematicalExpressions
          */
 
         $validate = [];
-        if (preg_match_all("/(\[^0-9()*\-\/+ \])+/", $expression, $validate))
+        if (preg_match_all("/(\[^0-9()*\-\/+% \])+/", $expression, $validate))
             throw new MathematicalExpressionsException("Expression contains non-mathematical characters.");
 
         /**
@@ -258,7 +268,7 @@ final class MathematicalExpressions
         /**
          * First extract and calculate all nested expressions wrapped by parentheses
          */
-        while (preg_match_all("/\(([+\-]?[0-9]+[+\-*\/]{1}[+\-]?[0-9]*[.]*[0-9]+)+\)/", $expression, $partialExpressions))
+        while (preg_match_all("/\(([+\-]?[0-9]+[+\-*\/%]{1}[+\-]?[0-9]*[.]*[0-9]+)+\)/", $expression, $partialExpressions))
         {
             $len = sizeof($partialExpressions[0]);
             for ($i=0; $i < $len; $i++)

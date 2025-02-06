@@ -1,0 +1,21 @@
+{
+    "name": "ds/cb-builder",
+    "description": "Create content blocks via console command and yaml a yaml file. Handy PHP classes are included and fluid helpers are provided automatically.",
+    "type": "typo3-cms-extension",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "require": {
+        "typo3/cms-core": "^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DS\\CbBuilder\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "cb_builder"
+        }
+    }
+}

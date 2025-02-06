@@ -6,6 +6,9 @@ lib {
         partialRootPaths {
             100 = EXT:menucardpackage/Resources/Private/Extensions/fluidStyledContent/Partials/
         }
+        templateRootPaths {
+            100 = EXT:menucardpackage/Resources/Private/Extensions/fluidStyledContent/Templates/
+        }
         settings.media.popup {
             JSwindow = 0
             directImageLink = 1

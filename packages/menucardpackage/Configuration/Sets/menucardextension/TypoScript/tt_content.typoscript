@@ -1,0 +1,6 @@
+tt_content {
+  foodmenu =< lib.contentElement
+  foodmenu {
+    templateName = Foodmenu
+  }
+}

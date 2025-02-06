@@ -1,0 +1,16 @@
+<html
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h3><strong>Review Quotes</strong></h3></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+<f:for each="{data.review_quotes}" as="item">
+    <p>{item.quote} - {item.customer_name}</p>
+</f:for>
+</f:section>

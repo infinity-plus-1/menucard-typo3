@@ -1,0 +1,7 @@
+mod.web_layout {
+  tt_content {
+    preview {
+      foodmenu = EXT:menucardpackage/Resources/Private/Templates/Preview/Default.html
+    }
+  }
+}

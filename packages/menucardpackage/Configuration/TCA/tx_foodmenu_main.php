@@ -38,8 +38,8 @@ return [
             'label' => 'Food menu description',
             'description' => 'Promote the available dishes',
             'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
+                'type' => 'input',
+                'required' => true,
             ],
         ],
         'menu_cols' => [
@@ -51,6 +51,7 @@ return [
                 'foreign_table_field' => 'parenttable',
                 //'MM' => 'tx_styleguide_inline_mm_child_rel',
                 'appearance' => [
+                    'collapseAll' => true,
                     'showSynchronizationLink' => 1,
                     'showAllLocalizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
@@ -62,7 +63,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                --div--;General, header_main, --linebreak--, desc_main, --linebreak--, menu_cols,
+                --div--;General, header_main, header_icon, --linebreak--, desc_main, --linebreak--, menu_cols,
                 --div--;Visibility, sys_language_uid, l18n_parent,l18n_diffsource, hidden
             ',
         ],
