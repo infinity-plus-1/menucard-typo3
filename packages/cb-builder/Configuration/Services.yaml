@@ -6,3 +6,7 @@ services:
   DS\CbBuilder\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
+  DS\CbBuilder\Backend\EventListener\MyEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'cb-builder/backend/modify-enabled-controls'

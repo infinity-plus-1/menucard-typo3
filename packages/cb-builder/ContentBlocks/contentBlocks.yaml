@@ -1,0 +1,8 @@
+contentBlocks:
+  new_content_block:
+    identifier: new_content_block
+    name: 'New Content Block'
+    path: ./packages/cb-builder
+    extension: cb-builder
+    namespace: packages
+    group: default

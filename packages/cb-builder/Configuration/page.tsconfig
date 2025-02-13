@@ -1,0 +1,6 @@
+
+//&%!§(§?%&new_content_block&%?§)§!%& NEVER DELETE THIS STARTING AND THE ENDING COMMENT - NEVER USE THE TOKEN CHARACTER SETS IN THAT ORDER!
+
+mod.web_layout.tt_content.preview.new_content_block = EXT:cb_builder/ContentBlocks/new_content_block/Templates/be_preview.html
+
+//&%!§(§?%&new_content_block&%?§)§!%&

@@ -57,7 +57,7 @@ class FoodmenuPreviewRenderer implements PreviewRendererInterface
 
             }
         }
-
+        //\TYPO3\CMS\Fluid\View\StandaloneView
         //$view->render();
         return '';
        

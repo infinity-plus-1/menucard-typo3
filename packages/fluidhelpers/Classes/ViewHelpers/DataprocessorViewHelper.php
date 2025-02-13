@@ -17,6 +17,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use DS\fluidHelpers\ViewHelpers\SetViewHelper;
 use Exception;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 
@@ -46,6 +47,8 @@ class DataprocessorViewHelperException extends Exception {}
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class DataprocessorViewHelper extends AbstractViewHelper

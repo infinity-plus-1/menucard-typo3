@@ -39,6 +39,7 @@
         "typo3/minimal": "^13",
         "menucardvendor/menucardpackage": "@dev",
         "ds/fluidhelpers": "@dev",
+        "ds/cb-builder": "@dev",
         "friendsoftypo3/content-blocks": "^1.1"
     },
     "config": {

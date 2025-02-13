@@ -1,0 +1,20 @@
+name: New Content Block
+identifier: new_content_block
+description: This is the content block New Content Block
+group: default
+placeAt: textmedia
+position: after
+fields:
+  
+  - identifier: header
+    useExistingField: true
+    type: Text
+    required: true
+    description: The header for this element.
+    default: This is a default value.
+  - type: Linebreak
+  - identifier: bodytext
+    useExistingField: true
+    type: Textarea
+    enableRichtext: true
+    description: The main text area of this element.

@@ -173,3 +173,5 @@ return [
         'sitename' => 'New TYPO3 site',
     ],
 ];
+
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler'] = 'TYPO3\CMS\Core\Error\DebugExceptionHandler';

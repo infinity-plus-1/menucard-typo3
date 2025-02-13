@@ -7,7 +7,6 @@ defined('TYPO3') or die();
 
 $GLOBALS['TCA']['tt_content']['columns']['menu_cols'] = $GLOBALS['TCA']['tx_foodmenu_main']['columns']['menu_cols'];
 $key = 'foodmenu';
-
 ExtensionManagementUtility::addTcaSelectItem
 (
     'tt_content',

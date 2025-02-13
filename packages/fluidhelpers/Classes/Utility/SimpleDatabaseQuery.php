@@ -358,6 +358,7 @@ final class SimpleDatabaseQuery
             if ($expression[$index-1] === '\\' && Utility::isEscaped($expression, $index-1))
                 throw new SimpleDatabaseQueryException("Syntax error in expression: Last closing string character is escaped.");
 
+            if ($this->currentVarIsString) $this->isString = '';
             $this->_addValueToClause($expression, $index, true, $value);
         }
         else
@@ -624,7 +625,7 @@ final class SimpleDatabaseQuery
     */
     public function fetch (
         string $table,
-        ?string $select = '*',
+        string|array $select = '*',
         ?string $whereClauseExpression = 'uid == 0',
         ?string $order = '',
         ?array $variables = [],
@@ -632,13 +633,14 @@ final class SimpleDatabaseQuery
         ?bool $throwIfTableDoesNotExist = true
     ): array
     {
-        if ($this->tableExists($table))
+        if ($this->tableExists($table) || $throwIfTableDoesNotExist === false)
         {
             $this->variables = $variables;
+            $select = is_array($select) ? $select : [$select];
             $this->queryBuilder = $this->_establishConnection($table);
             $this->_lexAndParseWhereClauses($whereClauseExpression);
             $this->queryBuilder
-                ->select($select)
+                ->select(...$select)
                 ->from($table)
                 ->where($useNativeDqlSyntax ? $whereClauseExpression : $this->_buildWhere());
             $this->_createOrderBy($order);
@@ -651,6 +653,28 @@ final class SimpleDatabaseQuery
             if ($throwIfTableDoesNotExist)
                 throw new SimpleDatabaseQueryException("Table with identifier $table does not exist.");
             else return [];
+        }
+    }
+
+    public static function getFieldProperties(string $identifier, bool $useExistingFields, ?string $table = ''): array
+    {
+        if ($useExistingFields === false && $table === '') {
+            throw new SimpleDatabaseQueryException (
+                "Unknown table provided."
+            );
+        }
+        $table = $useExistingFields ? 'tt_content' : $table;
+        $sdq = new SimpleDatabaseQuery();
+        if ($sdq->tableExists($table)) {
+            $select = [
+                'TABLE_SCHEMA', 'TABLE_NAME', 'COLUMN_NAME', 'ORDINAL_POSITION', 'COLUMN_DEFAULT', 'IS_NULLABLE', 'DATA_TYPE',
+                'CHARACTER_MAXIMUM_LENGTH', 'CHARACTER_OCTET_LENGTH', 'NUMERIC_PRECISION', 'NUMERIC_SCALE', 'DATETIME_PRECISION',
+                'CHARACTER_SET_NAME', 'COLLATION_NAME', 'COLUMN_TYPE', 'COLUMN_KEY', 'EXTRA', 'PRIVILEGES', 'COLUMN_COMMENT',
+                'GENERATION_EXPRESSION'
+            ];
+            $where = "TABLE_NAME == '$table' && COLUMN_NAME == '$identifier'";
+
+            return $sdq->fetch("INFORMATION_SCHEMA.COLUMNS", $select, $where, '', [], false, false);
         }
     }
 

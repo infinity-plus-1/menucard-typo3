@@ -1,0 +1,10 @@
+tt_content.{%%Identifier%%} = FLUIDTEMPLATE
+tt_content.{%%Identifier%%} {
+    file = EXT:{%%Extension%%}/ContentBlocks/{%%Identifier%%}/Templates/fe_preview.html
+    partialRootPaths {
+        5 = EXT:{%%Extension%%}/ContentBlocks/{%%Identifier%%}/Partials/
+    }
+    layoutRootPaths {
+        5 = EXT:{%%Extension%%}/ContentBlocks/{%%Identifier%%}/Layouts/
+    }
+}

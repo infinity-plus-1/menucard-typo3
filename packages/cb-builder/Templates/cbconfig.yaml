@@ -1,0 +1,4 @@
+config:
+  Tokens:
+    identifierOpeningToken: "&%!§(§?%&"
+    identifierClosingToken: "&%?§)§!%&"

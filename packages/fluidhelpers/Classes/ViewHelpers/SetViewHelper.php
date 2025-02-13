@@ -283,7 +283,6 @@ final class SetViewHelper extends AbstractViewHelper
 
             if ($this->arguments['force'] && $globalVars->exists($key)) $globalVars->remove($key);
 
-            
             $globalVars->add($key, $variable);
         }
     }

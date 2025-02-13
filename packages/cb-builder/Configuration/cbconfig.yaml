@@ -1,0 +1,9 @@
+config:
+  Tokens:
+    identifierOpeningToken: "&%!§(§?%&"
+    identifierClosingToken: "&%?§)§!%&"
+  Strict: true
+  propertySpecific:
+    Text:
+      default:
+        allowLongerThanMaxDbLen: false  # Will throw an error if the default value is longer than maximum length of varchar when set to false and Strict is true
