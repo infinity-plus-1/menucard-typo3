@@ -5,16 +5,44 @@ group: default
 placeAt: textmedia
 position: after
 fields:
-  
   - identifier: header
     useExistingField: true
     type: Text
     required: true
     description: The header for this element.
-    default: This is a default value.
   - type: Linebreak
   - identifier: bodytext
     useExistingField: true
     type: Textarea
     enableRichtext: true
     description: The main text area of this element.
+  - identifier: grouper
+    type: Group
+    label: grouplabel
+    description: groupele
+    allowed: url
+    autoSizeMax: '3'
+    maxitems: '5'
+    minitems: '1'
+    elementBrowserEntryPoints:
+      tt_content: 123
+      tx_news_domain_model_news: 124
+    filter:                                                                           
+      -                                                                               
+        userFunc: '\Vendor\Extension\UserFunction\ClassName->method'                
+        parameters:                                                                   
+          key1: 'value1'                                                              
+          key2: value2
+    foreign_table: fe_users
+    MM: test2
+    MM_match_fields:
+      explicit_allowdeny: '1'
+    MM_opposite_field: helloworld
+    MM_oppositeUsage:                                                                            
+      tt_content:
+        - header
+  
+  - identifier: test2
+    type: Collection
+  - identifier: helloworld
+    type: Text

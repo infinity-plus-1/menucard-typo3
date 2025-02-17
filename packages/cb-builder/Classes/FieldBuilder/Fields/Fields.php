@@ -50,7 +50,48 @@ class Fields
                 case 'Checkbox':
                     return new CheckboxField($field, $table);
                     break;
-
+                case 'Link':
+                    return new LinkField($field, $table);
+                    break;
+                case 'Json':
+                    return new JsonField($field, $table);
+                    break;
+                case 'Color':
+                    return new ColorField($field, $table);
+                    break;
+                case 'Datetime':
+                    return new DatetimeField($field, $table);
+                    break;
+                case 'Email':
+                    return new EmailField($field, $table);
+                    break;
+                case 'Folder':
+                    return new FolderField($field, $table);
+                    break;
+                case 'None':
+                    return new NoneField($field, $table);
+                    break;
+                case 'Pass':
+                    return new PassField($field, $table);
+                    break;
+                case 'Category':
+                    return new CategoryField($field, $table);
+                    break;
+                case 'Password':
+                    return new PasswordField($field, $table);
+                    break;
+                case 'Radio':
+                    return new RadioField($field, $table);
+                    break;
+                case 'Slug':
+                    return new SlugField($field, $table);
+                    break;
+                case 'Uuid':
+                    return new UuidField($field, $table);
+                    break;
+                case 'Group':
+                    return new GroupField($field, $table);
+                    break;
                 case 'Collection':
                     return new CollectionContainer($field, $table);
                     break;

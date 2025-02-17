@@ -26,7 +26,7 @@ $GLOBALS['TCA']['tt_content']['types'][$key] =
 [
     //'previewRenderer' => menucardvendor\menucardpackage\Backend\Preview\FoodmenuPreviewRenderer::class,
     'showitem' => '
-            --palette--;;header,defaultButtonText,bodytext,menu_cols
+            --palette--;;header,defaultButtonText,bodytext,menu_cols,
     ',
     'columnsOverrides' =>
     [

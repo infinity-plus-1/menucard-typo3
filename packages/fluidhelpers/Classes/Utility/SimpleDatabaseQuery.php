@@ -54,8 +54,10 @@ final class SimpleDatabaseQueryNodes extends SimpleDatabaseQueryNode
                 break;
             case SimpleDatabaseQueryNode::GROUP:
                 break;
+            case SimpleDatabaseQueryNode::COMMA_GROUP:
+                break;
             default:
-                throw new SimpleDatabaseQueryException("Unknown error. Please verify that the follwing value ranges between 1 and 3: $type.");
+                throw new SimpleDatabaseQueryException("Unknown error. Please verify that the following value ranges between 1 and 4: $type.");
                 break;
         }
 
@@ -80,6 +82,7 @@ class SimpleDatabaseQueryNode
     public const CLAUSE = 1;
     public const LOGICAL = 2;
     public const GROUP = 3;
+    public const COMMA_GROUP = 4;
 
     public function __construct
     (
@@ -160,6 +163,7 @@ final class SimpleDatabaseQuery
     protected string $isString;
     protected bool $currentVarIsString;
     protected bool $isLike;
+    protected bool $isIn;
 
     public function __construct
     (
@@ -196,12 +200,12 @@ final class SimpleDatabaseQuery
                 $value = floatval($value);
             else
                 $value = intval($value);
+        } else if (is_string($value)) {
+            if (strtolower($value) === 'true')
+                $value = 1;
+            else if (strtolower($value) === 'false')
+                $value = 0;
         }
-        else if (strtolower($value) === 'true')
-            $value = 1;
-        else if (strtolower($value) === 'false')
-            $value = 0;
-
         return $value;
     }
 
@@ -255,6 +259,12 @@ final class SimpleDatabaseQuery
                     $this->currentNode->setComparison('%%');
                     $this->isLike = true;
                     break;
+                case '-':
+                    if ($expression[$index] !== '>')
+                        throw new SimpleDatabaseQueryException("Syntax error in expression. Wrong comparison character at position $index.");
+                    $this->currentNode->setComparison('->');
+                    $this->isIn = true;
+                    break;
                 default:
                     throw new SimpleDatabaseQueryException("Unknown error. Wrong operand $operator is forwarded to function _addCompareOperand");
                     break;
@@ -278,7 +288,11 @@ final class SimpleDatabaseQuery
                 "Have you set a variable?"
             );
         }
-        $value = htmlspecialchars($value);
+
+        if (is_string($value)) {
+            $value = htmlspecialchars($value);
+        }
+
         if ($this->isString)
         {
             if (!$isLast) $index--;
@@ -304,12 +318,28 @@ final class SimpleDatabaseQuery
             }
             else $value = $this->_convertValue($value);
         }
-        if ($value !== '' && $this->isLike) $value = '%' . $value . '%';
-        if ($value !== '')
-        {
-            $this->currentNode->setRValue($value);
-            $this->_addQueryNode($index);
+
+        if (is_string($value)) {
+            if ($value !== '' && $this->isLike) $value = '%' . $value . '%';
+            if ($value !== '')
+            {
+                $this->currentNode->setRValue($value);
+                $this->_addQueryNode($index);
+            }
+        } else if ($value instanceof SimpleDatabaseQueryNode) {
+            if ($value->getType() === SimpleDatabaseQueryNode::COMMA_GROUP) {
+                $value->setLValue(trim($value->getLValue(), '()'));
+                $splittedValues = Utility::stringSafeTrimExplide(',', $value->getLValue());
+                $len = count($splittedValues);
+                for ($i=0; $i < $len; $i++) { 
+                    $splittedValues[$i] = "'" . trim($splittedValues[$i], "'") . "'";
+                }
+                $value->setLValue(implode(', ', $splittedValues));
+                $this->currentNode->setRValue($value);
+                $this->_addQueryNode($index);
+            }
         }
+
         $value = '';
         $this->isColumn = true;
     }
@@ -400,9 +430,57 @@ final class SimpleDatabaseQuery
         }
     }
 
+    private function _addCommaGroup($expression, &$index, int $lenMinusOne, &$value, &$column, ?bool $open = true): void
+    {
+        $group = '';
+        if (!$this->isString)
+        {
+            $isString = '';
+            $breakOut = false;
+            for (; $index < $lenMinusOne && !$breakOut; $index++) { 
+                $char = $expression[$index];
+                switch ($char) {
+                    case '\'':
+                        if (($expression[$index-1] !== '\\') || ($expression[$index-1] === '\\' && !Utility::isEscaped($expression, ($index-1)))) {
+                            if ($isString === '') {
+                                $isString = '\'';
+                            } else if ($isString === '\'') {
+                                $isString = '';
+                            }
+                        }
+                        break;
+                    case '"':
+                        if (($expression[$index-1] !== '\\') || ($expression[$index-1] === '\\' && !Utility::isEscaped($expression, ($index-1)))) {
+                            if ($isString === '') {
+                                $isString = '"';
+                            } else if ($isString === '"') {
+                                $isString = '';
+                            }
+                        }
+                        break;
+                    case ')':
+                        if ($isString === '') {
+                            $breakOut = true;
+                            $index--;
+                        }
+                        $group .= ')';
+                        break;
+                    default:
+                        $group .= $char;
+                        break;
+                }
+            }
+            $value = new SimpleDatabaseQueryNode($group, SimpleDatabaseQueryNode::COMMA_GROUP);
+            $this->_addValueToClause($expression, $index, false, $value);
+        } else {
+            if ($this->isColumn) $column .= $open ? '(' : ')';
+            else $value .= $open ? '(' : ')';
+        }
+    }
+
     private function _lexAndParseWhereClauses($clause): void
     {
-        $expression = str_replace(' ', '', $clause);
+        $expression = str_replace(' ', '', str_replace('IN', '->', $clause));
         if ($expression === '') return;
         $len = strlen($expression);
         $lenMinusOne = $len-1;
@@ -415,6 +493,7 @@ final class SimpleDatabaseQuery
         $this->isString = '';
         $this->currentVarIsString = false;
         $this->isLike = false;
+        $this->isIn = false;
         for ($i=0; $i < $lenMinusOne; $i++)
         {
             $char = $expression[$i];
@@ -443,10 +522,18 @@ final class SimpleDatabaseQuery
                     }
                     break;
                 case '(':
-                    $this->_addGroup($expression, $i, $value, $column);
+                    if (!$this->isIn) {
+                        $this->_addGroup($expression, $i, $value, $column);
+                    } else {
+                        $this->_addCommaGroup($expression, $i, $lenMinusOne, $value, $column);
+                    }
                     break;
                 case ')':
-                    $this->_addGroup($expression, $i, $value, $column, false);
+                    if (!$this->isIn) {
+                        $this->_addGroup($expression, $i, $value, $column, false);
+                    } else {
+                        $this->isIn = false;
+                    }
                     break;
                 case '<':
                     $this->_addComparisonOperator('<', $expression, $i, $len, $column, $value);
@@ -462,6 +549,9 @@ final class SimpleDatabaseQuery
                     break;
                 case '%':
                     $this->_addComparisonOperator('%', $expression, $i, $len, $column, $value);
+                    break;
+                case '-':
+                    $this->_addComparisonOperator('-', $expression, $i, $len, $column, $value);
                     break;
                 case '&':
                     $this->_addLogicalOperator('&', $expression, $i, $len, $column, $value);
@@ -524,12 +614,21 @@ final class SimpleDatabaseQuery
                         case '%%':
                             $dql .= 'LIKE ';
                             break;
+                        case '->':
+                            $dql .= 'IN ';
+                            break;
                         default:
                             $dql .= $node->getComparison() . ' ';
                             break;
                     }
                     $this->_injectVariable($node);
-                    $dql .= $node->getRValue() . ' ';
+                    
+                    if (is_string($node->getRValue())) {
+                        $dql .= $node->getRValue() . ' ';
+                    } else {
+                        $dql .= '(' . $node->getRValue()->getLValue() . ') ';
+                    }
+                    
                     break;
                 case SimpleDatabaseQueryNode::LOGICAL:
                     $logicalOperator = $node->getLValue();
@@ -656,14 +755,9 @@ final class SimpleDatabaseQuery
         }
     }
 
-    public static function getFieldProperties(string $identifier, bool $useExistingFields, ?string $table = ''): array
+    public static function getFieldProperties(string $identifier, ?string $table = ''): array
     {
-        if ($useExistingFields === false && $table === '') {
-            throw new SimpleDatabaseQueryException (
-                "Unknown table provided."
-            );
-        }
-        $table = $useExistingFields ? 'tt_content' : $table;
+        $table = $table ?? 'tt_content';
         $sdq = new SimpleDatabaseQuery();
         if ($sdq->tableExists($table)) {
             $select = [
@@ -676,6 +770,37 @@ final class SimpleDatabaseQuery
 
             return $sdq->fetch("INFORMATION_SCHEMA.COLUMNS", $select, $where, '', [], false, false);
         }
+    }
+
+    public static function getFieldsProperties(string $identifier, ?array $tables = ['*']): array
+    {
+        $sdq = new SimpleDatabaseQuery();
+        $select = [
+            'TABLE_SCHEMA', 'TABLE_NAME', 'COLUMN_NAME', 'ORDINAL_POSITION', 'COLUMN_DEFAULT', 'IS_NULLABLE', 'DATA_TYPE',
+            'CHARACTER_MAXIMUM_LENGTH', 'CHARACTER_OCTET_LENGTH', 'NUMERIC_PRECISION', 'NUMERIC_SCALE', 'DATETIME_PRECISION',
+            'CHARACTER_SET_NAME', 'COLLATION_NAME', 'COLUMN_TYPE', 'COLUMN_KEY', 'EXTRA', 'PRIVILEGES', 'COLUMN_COMMENT',
+            'GENERATION_EXPRESSION'
+        ];
+        $tableNames = '';
+        if (!in_array('*', $tables)) {
+            $tableNames .= 'TABLE_NAME IN (';
+            $legit = false;
+            foreach ($tables as $table) {
+                if (is_string($table) && $sdq->tableExists($table)) {
+                    $tableNames .= "'" . trim($table, "'") . "', ";
+                    $legit = true;
+                }
+            }
+            if (!$legit) return [];
+            $tableNames = trim($tableNames, ', ') . ') && ';
+        }
+        $where = $tableNames . "COLUMN_NAME == '$identifier'";
+        return $sdq->fetch("INFORMATION_SCHEMA.COLUMNS", $select, $where, '', [], false, false);
+    }
+
+    public static function fieldExists(string $field, ?array $tables = ['*']): bool
+    {
+        return !empty(SimpleDatabaseQuery::getFieldsProperties($field, $tables));
     }
 
 }

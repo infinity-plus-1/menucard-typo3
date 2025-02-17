@@ -25,6 +25,14 @@ final class CheckboxFieldConfig extends Config
     protected string $renderType = 'check';
     protected array $validation = [];
 
+    const RENDER_TYPES = [
+        'check', 'checkboxToggle', 'checkboxLabeledToggle'
+    ];
+
+    const EVAL_KEYWORDS = [
+        'maximumRecordsChecked', 'maximumRecordsCheckedInPid'
+    ];
+
     private function _calculateBITMASK(): int
     {
         $set = 0;
@@ -46,199 +54,198 @@ final class CheckboxFieldConfig extends Config
         return ((~(abs(~(PHP_INT_MAX - (1 << $count))))) & (0x7FFFFFFFFFFFFFFF)) >= $bitmask ;
     }
 
-    private function _validateCols($entry): void
+    private function _validateCols($entry, $config): void
     {
-        if (
-            'inline' === $entry
-            || (($entry = filter_var($entry, FILTER_SANITIZE_NUMBER_INT)) !== false && $entry > 0 && $entry < 32)
-            || $GLOBALS['CbBuilder']['config']['Strict'] === false
-        ) {
-            $this->cols = $entry === 'inline' ? 'inline' : intval($entry);
-        }
-        else {
-            throw new Exception("'Checkbox' field configuration 'cols' must contain either 'inline' or an integer " .
+        $identifier = $config['identifier'];
+        if ('inline' === $entry) {
+            $this->cols = 'inline';
+        } else if ($entry = $this->handleIntegers($entry)) {
+            if ($entry <= 0 || $entry >= 32) {
+                $this->cols = $entry;
+            }
+        } else {
+            throw new Exception("'Checkbox' field '$identifier' configuration 'cols' must contain either 'inline' or an integer " .
             "between 1-31, if set.");
         }
     }
 
     private function _validateDefault($entry, $config): void
     {
-        if (($entry = filter_var($entry, FILTER_SANITIZE_NUMBER_INT)) !== false || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-            $entry = intval($entry);
-            if ($entry <= 0xFFFFFFFF || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-                if ($entry === 0 || $entry === 1) {
+        $identifier = $config['identifier'];
+        if ($entry = $this->handleIntegers($entry)) {
+            if ($entry > 0xFFFFFFFF) {
+                throw new Exception("'Checkbox' field '$identifier' configuration 'default' must be an integer between 0 and 4294967295, if set.");
+            }
+            if ($entry === 0 || $entry === 1) {
+                $this->default = $entry;
+            } else if (isset($config['items'])) {
+                if (empty($this->items)) $this->_validateItems($config['items'], $config);
+                if ($this->_validateBITMASK($entry)) {
                     $this->default = $entry;
-                } else if (isset($config['items']) || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-                    if (empty($this->items)) $this->_validateItems($config['items']);
-                    if ($this->_validateBITMASK($entry) || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-                        $this->default = $entry;
-                    } else {
-                        throw new Exception (
-                            "'Checkbox' field configuration 'default' does not match with the " .
-                            "number of checkboxes defined in 'items', if set."
-                        );
-                    }
                 } else {
                     throw new Exception (
-                        "'Checkbox' field configuration 'default' does not match with the " .
-                        "number of checkboxes defined in 'items'."
+                        "'Checkbox' field '$identifier' configuration 'default' does not match with the " .
+                        "number of checkboxes defined in 'items', if set."
                     );
                 }
             } else {
-                throw new Exception("'Checkbox' field configuration 'default' must be an integer between 0 and 4294967295, if set.");
+                throw new Exception (
+                    "'Checkbox' field '$identifier' configuration 'default' does not match with the " .
+                    "number of checkboxes defined in 'items'."
+                );
             }
-            
         } else {
-            throw new Exception("'Checkbox' field configuration 'default' must be an integer, if set.");
+            throw new Exception("'Checkbox' field '$identifier' configuration 'default' must be an integer, if set.");
         }
     }
 
     private function _validateDefaultList($entry, $config): void
     {
+        $identifier = $config['identifier'];
         if (is_string($entry) && $entry !== '') {
             $entry = array_map('trim', explode(',', $entry)); 
         }
-        if (isset($config['items']) && empty($this->items)) $this->_validateItems($config['items']);
+        if (isset($config['items']) && empty($this->items)) $this->_validateItems($config['items'], $config);
         $this->defaultList = [];
+        $i = 0;
         foreach ($entry as $num) {
-            if (($num = filter_var($num, FILTER_SANITIZE_NUMBER_INT)) !== false || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-                $this->defaultList[] = intval($num);
+            if ($num = $this->handleIntegers($num)) {
+                $this->defaultList[] = $num;
             } else {
                 throw new Exception (
-                    "'Checkbox' field configuration 'defaultList[0-n]' must be an integer, if set."
+                    "'Checkbox' field '$identifier' configuration 'defaultList[$i]' must be an integer, if set."
                 );
             }
+            $i++;
         }
         $this->_validateDefault($this->_calculateBITMASK(), $config);
     }
 
     private function _validateEval($entry, $config): void
     {
-        if ('maximumRecordsChecked' === $entry || 'maximumRecordsCheckedInPid' === $entry || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-            if (!isset($config['validation'])) {
-                if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
-                    throw new Exception (
-                        "'Checkbox' field configuration 'eval' must be combined with 'validation', if set." .
-                        " E.g.: 'eval' => 'maximumRecordsCheckedInPid',\n'validation' => [\n\t'maximumRecordsCheckedInPid' => 1\n]"
-                    );
-                }
-            }
-            $this->eval = $entry;
-            if (empty($this->validation)) $this->_validateValidation($config['validation'], $config);
-            if ($entry !== array_key_first($this->validation[0])) {
-                if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
-                    throw new Exception (
-                        "'Checkbox' field configuration 'eval' must match with 'validation', if set." .
-                        " E.g.: 'eval' => 'maximumRecordsCheckedInPid',\n'validation' => [\n\t'maximumRecordsCheckedInPid' => 1\n]"
-                    );
-                }
-            }
-        } else {
+        $identifier = $config['identifier'];
+        if (!in_array($entry, self::EVAL_KEYWORDS)) {
             throw new Exception (
-                "'Checkbox' field configuration 'eval' must either contain 'maximumRecordsChecked' or " .
-                "'maximumRecordsCheckedInPid', if set."
+                "'Checkbox' field '$identifier' configuration 'eval' must contain one of the following keywords, if set: " .
+                implode(', ', self::EVAL_KEYWORDS)
+            );
+        }
+        if (!isset($config['validation'])) {
+            throw new Exception (
+                "'Checkbox' field '$identifier' configuration 'eval' must be combined with 'validation', if set." .
+                " Fix: 'eval' => '$entry',\n'validation' => [\n\t'$entry' => 1\n]"
+            );
+        }
+        $this->eval = $entry;
+        if (empty($this->validation)) $this->_validateValidation($config['validation'], $config);
+        if ($entry !== array_key_first($this->validation[0])) {
+            throw new Exception (
+                "'Checkbox' field '$identifier' configuration 'eval' must match with 'validation', if set." .
+                " E.g.: 'eval' => '$entry',\n'validation' => [\n\t'$entry' => 1\n]"
             );
         }
     }
 
-    private function _validateItems($entry): void
+    private function _validateItems($entry, $config): void
     {
-
-        if (is_array($entry)) {
-            $this->items = [];
-            foreach ($entry as $item) {
-                if (is_array($item) || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
-                    foreach ($item as $key => $property) {
-                        if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
-                            switch ($key) {
-                                case 'label':
-                                    if (!is_string($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'items[0-n]['label' => 'value']' must " .
-                                            "have a string label identifier, if set."
-                                        );
-                                    }
-                                    break;
-                                case 'invertStateDisplay':
-                                    if (!is_bool($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'invertStateDisplay' must " .
-                                            "be of type boolean, if set."
-                                        );
-                                    }
-                                    break;
-                                case 'iconIdentifierChecked':
-                                    if (!is_string($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'iconIdentifierChecked' must " .
-                                            "have a string icon identifier, if set."
-                                        );
-                                    }
-                                    break;
-                                case 'iconIdentifierUnchecked':
-                                    if (!is_string($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'iconIdentifierUnchecked' must " .
-                                            "have a string icon identifier, if set."
-                                        );
-                                    }
-                                    break;
-                                case 'labelChecked':
-                                    if (!is_string($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'labelChecked' must " .
-                                            "be of type string, if set."
-                                        );
-                                    }
-                                    break;
-                                case 'labelUnchecked':
-                                    if (!is_string($property)) {
-                                        throw new Exception (
-                                            "'Checkbox' field configuration 'labelUnchecked' must " .
-                                            "be of type string, if set."
-                                        );
-                                    }
-                                    break;
-                                default:
-                                    // skip
-                                    break;
-                            }
+        $identifier = $config['identifier'];
+        if (!is_array($entry)) {
+            throw new Exception (
+                "'Checkbox' field '$identifier' configuration 'items' must be of type array."
+            );
+        }
+        $this->items = [];
+        $i = 0;
+        foreach ($entry as $item) {
+            if (!is_array($item)) {
+                throw new Exception (
+                    "'Number' field '$identifier' configuration 'items[$i]' each item must be of type array."
+                );
+            }
+            foreach ($item as $key => $property) {
+                switch ($key) {
+                    case 'label':
+                        if (!is_string($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i]['label' => 'value']' must " .
+                                "have a string label identifier, if set."
+                            );
                         }
-                    }
-                    $this->items[] = $item;
-                } else {
-                    throw new Exception (
-                        "'Number' field configuration 'items[0-n]' each item must be of type array."
-                    );
+                        break;
+                    case 'invertStateDisplay':
+                        if (!is_bool($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i][$key]' must " .
+                                "be of type boolean, if set."
+                            );
+                        }
+                        break;
+                    case 'iconIdentifierChecked':
+                        if (!is_string($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i][$key]' must " .
+                                "have a string icon identifier, if set."
+                            );
+                        }
+                        break;
+                    case 'iconIdentifierUnchecked':
+                        if (!is_string($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i][$key]' must " .
+                                "have a string icon identifier, if set."
+                            );
+                        }
+                        break;
+                    case 'labelChecked':
+                        if (!is_string($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i][$key]' must " .
+                                "be of type string, if set."
+                            );
+                        }
+                        break;
+                    case 'labelUnchecked':
+                        if (!is_string($property)) {
+                            throw new Exception (
+                                "'Checkbox' field '$identifier' configuration 'items[$i][$key]' must " .
+                                "be of type string, if set."
+                            );
+                        }
+                        break;
+                    default:
+                        throw new Exception (
+                            "'Checkbox' field '$identifier' configuration 'items[$i][$key]' is not a valid key, if set. " .
+                            "Fix: Remove $key entry from items[$i]"
+                        );
+                        break;
                 }
+                $this->items[] = $item;
+                $i++;
             }
         }
     }
 
-    private function _validateItemsProcFunc($entry): void
+    private function _validateItemsProcFunc($entry, $config): void
     {
-        if ((str_contains($entry, '->') && str_contains($entry, '::class')) || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
+        $identifier = $config['identifier'];
+        if ((str_contains($entry, '->') && str_contains($entry, '::class'))) {
             $this->itemsProcFunc = $entry;
         } else {
             throw new Exception (
-                "'Checkbox' field configuration 'itemsProcFunc' must contain a class path and name and method name in format: " .
+                "'Checkbox' field '$identifier' configuration 'itemsProcFunc' must contain a class path and name and method name in format: " .
                 "'\VENDOR\Extension\UserFunction\FormEngine\YourClass::class->yourMethod', if set."
             );
         }
     }
 
-    private function _validateRenderType($entry): void
+    private function _validateRenderType($entry, $config): void
     {
-        if (
-            $entry === 'check'
-            || $entry === 'checkboxToggle'
-            || $entry === 'checkboxLabeledToggle'
-            || $GLOBALS['CbBuilder']['config']['Strict'] === true
-        ) {
+        $identifier = $config['identifier'];
+        if (!in_array($entry, self::RENDER_TYPES)) {
             $this->renderType = $entry;
         } else {
             throw new Exception (
-                "'Checkbox' field configuration 'renderType' must contain either the keyword 'check', 'checkboxToggle' " .
+                "'Checkbox' field '$identifier' configuration 'renderType' must contain either the keyword 'check', 'checkboxToggle' " .
                 "or 'checkboxLabeledToggle', if set."
             );
         }
@@ -246,42 +253,54 @@ final class CheckboxFieldConfig extends Config
 
     private function _validateValidation($entry, $config): void
     {
+        $identifier = $config['identifier'];
         if (is_array($entry) || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
             if (count($entry) === 1 || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
+                if (!isset($entry[0])) {
+                    throw new Exception (
+                        "'Checkbox' field '$identifier' configuration 'validation[]' must contain exactly one element at index 0, if set." .
+                        " Fix:\nvalidation:\n  - maximumRecordsChecked: 1"
+                    );
+                }
                 $key = array_key_first($entry[0]);
                 if ('maximumRecordsChecked' === $key || 'maximumRecordsCheckedInPid' === $key || $GLOBALS['CbBuilder']['config']['Strict'] === false) {
                     if (!isset($config['eval'])) {
                         if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
                             throw new Exception (
-                                "'Checkbox' field configuration 'validation' must be combined with 'eval', if set." .
+                                "'Checkbox' field '$identifier' configuration 'validation' must be combined with 'eval', if set." .
                                 " E.g.: 'eval' => 'maximumRecordsCheckedInPid',\n'validation' => [\n\t'maximumRecordsCheckedInPid' => 1\n]"
                             );
                         }
+                    }
+                    if (!is_int($entry[0][$key])) {
+                        throw new Exception (
+                            "'Checkbox' field '$identifier' configuration 'validation[0][key]' must contain an integer value, if set."
+                        );
                     }
                     $this->validation = $entry;
                     if ($this->eval === '') $this->_validateEval($config['eval'], $config);
                     if ($key !== $this->eval) {
                         if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
                             throw new Exception (
-                                "'Checkbox' field configuration 'validation' must match with 'eval', if set." .
+                                "'Checkbox' field '$identifier' configuration 'validation' must match with 'eval', if set." .
                                 " E.g.: 'eval' => 'maximumRecordsCheckedInPid',\n'validation' => [\n\t'maximumRecordsCheckedInPid' => 1\n]"
                             );
                         }
                     } 
                 } else {
                     throw new Exception (
-                        "'Checkbox' field configuration 'validation' must either contain 'maximumRecordsChecked' or " .
+                        "'Checkbox' field '$identifier' configuration 'validation[0]' must either contain 'maximumRecordsChecked' or " .
                         "'maximumRecordsCheckedInPid', if set."
                     );
                 }    
             } else {
                 throw new Exception (
-                    "'Checkbox' field configuration 'validation' must contain exactly one element of type array, if set."
+                    "'Checkbox' field '$identifier' configuration 'validation' must contain exactly one element of type array, if set."
                 );
             }    
         } else {
             throw new Exception (
-                "'Checkbox' field configuration 'validation' must be of type array, if set."
+                "'Checkbox' field '$identifier' configuration 'validation' must be of type array, if set."
             );
         }    
     }
@@ -291,33 +310,37 @@ final class CheckboxFieldConfig extends Config
         $properties = get_object_vars($this);
         foreach ($config as $configKey => $value) {
             if ($this->isValidConfig($properties, $configKey)) {
-                switch ($configKey) {
-                    case 'cols':
-                        $this->_validateCols($value);
-                        break;
-                    case 'default':
-                        if ($this->default < 0) $this->_validateDefault($value, $config);
-                        break;
-                    case 'defaultList':
-                        if (empty($this->defaultList)) $this->_validateDefaultList($value, $config);
-                        break;
-                    case 'eval':
-                        if ($this->eval === '') $this->_validateEval($value, $config);
-                        break;
-                    case 'items':
-                        if (empty($this->items)) $this->_validateItems($value);
-                        break;
-                    case 'itemsProcFunc':
-                        $this->_validateItemsProcFunc($value);
-                        break;
-                    case 'renderType':
-                        $this->_validateRenderType($value);
-                        break;
-                    case 'validation':
-                        if (empty($this->validation)) $this->_validateValidation($value, $config);
-                        break;
-                    default:
-                        $this->$configKey = $value;
+                if ($GLOBALS['CbBuilder']['config']['Strict'] === true) {
+                    switch ($configKey) {
+                        case 'cols':
+                            $this->_validateCols($value, $config);
+                            break;
+                        case 'default':
+                            if ($this->default < 0) $this->_validateDefault($value, $config);
+                            break;
+                        case 'defaultList':
+                            if (empty($this->defaultList)) $this->_validateDefaultList($value, $config);
+                            break;
+                        case 'eval':
+                            if ($this->eval === '') $this->_validateEval($value, $config);
+                            break;
+                        case 'items':
+                            if (empty($this->items)) $this->_validateItems($value, $config);
+                            break;
+                        case 'itemsProcFunc':
+                            $this->_validateItemsProcFunc($value, $config);
+                            break;
+                        case 'renderType':
+                            $this->_validateRenderType($value, $config);
+                            break;
+                        case 'validation':
+                            if (empty($this->validation)) $this->_validateValidation($value, $config);
+                            break;
+                        default:
+                            $this->$configKey = $value;
+                    }
+                } else {
+                    $this->$configKey = $value;
                 }
             }
         }
@@ -339,10 +362,13 @@ final class CheckboxField extends Fields
 
     private function _arrayToField(array $field): void
     {
+        $this->__arrayToField('checkbox', $field);
+        $field['table'] = $this->table;
+        $field['useExistingField'] = $this->useExistingField;
+        $field['identifier'] = $this->identifier;
         $config = new CheckboxFieldConfig();
         $config->arrayToConfig($field);
         $this->config = $config;
-        $this->__arrayToField('checkbox', $field);
     }
 
     public function fieldToElement(): array

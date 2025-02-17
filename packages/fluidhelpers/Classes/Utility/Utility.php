@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace DS\fluidHelpers\Utility;
 
+use Exception;
+use ReflectionClass;
+
 /**
  * A class of useful helper functions
  */
@@ -117,6 +120,20 @@ final readonly class Utility
         return $result;
     }
 
+    public static function stringSafeTrimExplide (
+        string $delimiter,
+        string $string,
+        ?string $characters = " \n\r\t\v\x00",
+        ?int $limit = PHP_INT_MAX
+    ): array {
+        $result = Utility::stringSafeExplode($delimiter, $string, $limit);
+        $len = count($result);
+        for ($i=0; $i < $len; $i++) { 
+            $result[$i] = trim($result[$i], $characters);
+        }
+        return $result;
+    }
+
     public static function injectMergeField
     (
         string $variable,
@@ -163,6 +180,39 @@ final readonly class Utility
             $pos++;
         }
         return $variable;
+    }
+
+    public static function toString(mixed $value, ?bool $forceObjects = false): string
+    {
+        if (is_string($value)) return $value;
+        if (is_numeric($value) || is_bool($value)) return strval($value);
+        if (is_null($value)) return 'null';
+        if (is_array($value)) return serialize($value);
+        if (is_object($value)) {
+            if (method_exists($value, '__toString')) return $value->__toString();
+            else {
+                $reflectionClass = new ReflectionClass($value);
+                $classArray = [];
+                $classArray['Name'] = $reflectionClass->getName();
+                $classArray['Attributes'] = $reflectionClass->getAttributes();
+                $classArray['Constants'] = $reflectionClass->getConstants();
+                $classArray['DefaultProperties'] = $reflectionClass->getDefaultProperties();
+                $classArray['Properties'] = $reflectionClass->getProperties();
+                $classArray['Traits'] = $reflectionClass->getTraits();
+                return serialize($classArray);
+            }
+        }
+        throw new Exception("Unknown type can't be converted to string.");
+    }
+
+    public static function toNumber(mixed $value): int|float|bool
+    {
+        if (is_int($value)) return $value;
+        if (is_float($value)) return $value;
+        if (is_string($value) && is_numeric($value)) {
+            return str_contains($value, '.') ? floatval($value) : intval($value);
+        }
+        return false;
     }
     
 }
