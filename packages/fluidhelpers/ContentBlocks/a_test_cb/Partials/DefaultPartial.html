@@ -1,0 +1,6 @@
+<div>
+    <span class="<cb:ClassPrinter value="header"></cb:ClassPrinter>">{data.header}</span>
+    <cb:set value="name: '_cli_', id: 2" />
+    <cb:Dataprocessor source="db" as="content" tableName="be_users" where="username==$name && lang=='default' && uid==$id" />
+    <f:debug>{_all}</f:debug>
+</div>

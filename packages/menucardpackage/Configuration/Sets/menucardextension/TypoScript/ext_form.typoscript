@@ -1,0 +1,2 @@
+plugin.tx_form.settings.yamlConfigurations.200 = EXT:menucardpackage/Configuration/Sets/menucardextension/Form/FormSetup.yaml
+module.tx_form.settings.yamlConfigurations.200 = EXT:menucardpackage/Configuration/Sets/menucardextension/Form/FormSetup.yaml

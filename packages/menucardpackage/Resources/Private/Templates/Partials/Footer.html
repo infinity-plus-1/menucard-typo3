@@ -1,0 +1,43 @@
+<div id="fh5co-footer">
+    <div class="container">
+        <div class="row row-padded">
+            <div class="col-md-12 text-center">
+                <p class="to-animate">&copy; <f:format.date date="now" format="Y" locale="{siteLanguage.hreflang}" /> {settings.menucardextension.footerCopyrightText} <br> Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> Demo Images: <a href="http://pexels.com/" target="_blank">Pexels</a> <br> Tasty Icons Free <a href="http://handdrawngoods.com/store/tasty-icons-free-food-icons/" target="_blank">handdrawngoods</a>
+                </p>
+                <p class="text-center to-animate"><a href="#" class="js-gotop">Go To Top</a></p>
+            </div>
+        </div>
+        <f:comment><f:cObject typoscriptObjectPath="lib.testFluid" /></f:comment>
+        <div class="row text-center">
+            <div class="col"><span class="footerLeftCol">{content2 -> f:format.raw()}</span></div>
+            <div class="col">{content3 -> f:format.raw()}</div>
+            <div class="col">{content4 -> f:format.raw()}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="footbar-meta">
+                    <f:for each="{footbar}" as="page">
+                        <li>
+                            <f:link.typolink parameter="{page.data.uid}" class="{f:if(condition: page.active, then: 'footbar-meta-active')}">
+                                {page.title}
+                            </f:link.typolink>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+            <div class="col-md-12 text-center">
+                <ul class="fh5co-social">
+                    <f:for each="{settings.menucardextension.menucardextension-socialMediaFooter}" as="element">
+                        <f:if condition="{element.footerSocialMediaLink} && {element.footerSocialMediaLogo}">
+                            <li class="to-animate-2">
+                                <f:link.typolink parameter="{element.footerSocialMediaLink}">
+                                    <i class="{element.footerSocialMediaLogo}"></i>
+                                </f:link.typolink>
+                            </li>
+                        </f:if>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+
+
+//&%!§(§?%&textpicture&%?§)§!%& NEVER DELETE THIS STARTING AND THE ENDING COMMENT - NEVER USE THE TOKEN CHARACTER SETS IN THAT ORDER!
+
+mod.web_layout.tt_content.preview.textpicture = EXT:menucardpackage/ContentBlocks/textpicture/Templates/be_preview.html
+
+//&%!§(§?%&textpicture&%?§)§!%&
+//&%!§(§?%&menucards&%?§)§!%& NEVER DELETE THIS STARTING AND THE ENDING COMMENT - NEVER USE THE TOKEN CHARACTER SETS IN THAT ORDER!
+
+mod.web_layout.tt_content.preview.menucards = EXT:menucardpackage/ContentBlocks/menucards/Templates/be_preview.html
+
+//&%!§(§?%&menucards&%?§)§!%&
+//&%!§(§?%&blog_creator&%?§)§!%& NEVER DELETE THIS STARTING AND THE ENDING COMMENT - NEVER USE THE TOKEN CHARACTER SETS IN THAT ORDER!
+
+mod.web_layout.tt_content.preview.blog_creator = EXT:menucardpackage/ContentBlocks/blog_creator/Templates/be_preview.html
+
+//&%!§(§?%&blog_creator&%?§)§!%&

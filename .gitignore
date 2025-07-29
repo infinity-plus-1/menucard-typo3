@@ -1,0 +1,20 @@
+.git_cbbuilder
+test.yaml
+do.html
+__composer 2.json
+.DS_Store
+.idea
+.vscode
+/var/*
+!/var/labels
+/vendor
+/public/*
+!/public/.htaccess
+!/config/system/settings.php
+/config/system/additional.php
+*.gz
+*.cache
+database.sql
+db.sql
+fetchdatabase.sh
+/packages/cb-builder

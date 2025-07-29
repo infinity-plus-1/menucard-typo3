@@ -1,0 +1,47 @@
+
+<div id="fh5co-home" class="js-fullheight animated" data-section="home" style="height: 750px;">
+
+    <div class="flexslider">
+        
+        <div class="fh5co-overlay" style="opacity: 0.6815;"></div>
+        <div class="fh5co-text" style="opacity: -0.21; margin-top: 151px; display: none;">
+            <div class="container">
+                <div class="row">
+                    <h1 class="to-animate fadeInUp animated">{data.header}</h1>
+                    <h2 class="to-animate fadeInUp animated">{data.subheader}</h2>
+                </div>
+            </div>
+        </div>
+            <ul class="slides">
+                <f:for each="{data.image}" as="img" iteration="iterator">
+                    <li
+                        style="background-image: url(&quot;{img.publicUrl}&quot;); width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;"
+                        data-stellar-background-ratio="0.5"
+                        class="{f:if(condition: iterator.isFirst, then: 'flex-active-slide')}"
+                        data-thumb-alt="">
+                    </li>
+                </f:for>
+            </ul>
+
+    <ol class="flex-control-nav flex-control-paging">
+        <li>
+            <a href="#" class="flex-active">1</a>
+        </li>
+        <li>
+            <a href="#">2</a>
+        </li>
+        <li>
+            <a href="#">3</a>
+        </li>
+    </ol>
+    <ul class="flex-direction-nav">
+        <li class="flex-nav-prev">
+            <a class="flex-prev" href="#">Previous</a>
+        </li>
+        <li class="flex-nav-next">
+            <a class="flex-next" href="#">Next</a>
+        </li>
+    </ul>
+</div>
+    
+</div>

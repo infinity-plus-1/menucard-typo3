@@ -1,0 +1,49 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:m="http://typo3.org/ns/menucardvendor/menucardpackage/ViewHelpers" xmlns:fh="http://typo3.org/ns/DS/CbBuilder/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <f:asset.css identifier="main" href="{cb:assetPath()}/main.css"/>
+    <div id="fh5co-featured" data-section="features" class="animated" data-aos="{data.aos_type}" data-aos-duration="{data.aos_animation_duration}">
+        <div class="container">
+            <div class="row text-center fh5co-heading row-padded">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="heading to-animate fadeInUp animated">{data.header}</h2>
+                    <p class="sub-heading to-animate fadeInUp animated">{data.std_desc}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="fh5co-grid">
+                    <f:for each="{data.features_grid_collection}" as="item" iteration="itemIterator">
+                        <f:if condition="{itemIterator.isOdd}">
+                            <f:then>
+                                <div class="fh5co-v-half">
+                            </f:then>
+                            <f:else if="{item.std_checkbox}">
+                                </div>
+                                <div class="fh5co-v-half">
+                            </f:else>
+                        </f:if>
+                                <div class="fh5co-h-row-2 {f:if(condition: itemIterator.isEven, then: 'fh5co-reversed')} to-animate-2 bounceIn animated">
+                                    <div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<f:uri.image image="{item.image_featured_item.0.originalFile}" />)"></div>
+                                    <div
+                                        class="fh5co-v-col-2 {f:if(condition: item.std_checkbox, then: 'featuredItemOddBG')} fh5co-text {f:if(condition: itemIterator.isOdd, then: 'arrow-left', else: 'arrow-right')}"
+                                    >
+                                        <h2>{item.header_featured_item}</h2>
+                                        <span class="pricing">{item.item_price}$</span>
+                                        <p>{item.std_desc}</p>
+                                    </div>
+                                </div>
+                        <f:if condition="{itemIterator.isEven} || {itemIterator.isLast}">
+                            <f:then>
+                                </div>
+                            </f:then>
+                            <f:else if="{item.std_checkbox}">
+                                </div>
+                                <div class="fh5co-v-half">
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:spaceless>
+</html>

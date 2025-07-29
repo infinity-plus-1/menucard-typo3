@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="labels.xlf" source-language="en" date="2025-04-15T15:16:05+00:00" product-name="menucard/hero">
+		<header/>
+		<body>
+			<trans-unit id="title">
+				<source>Hero</source>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Create a hero element with a screen-wide image, a header and an optional subtext</source>
+			</trans-unit>
+			<trans-unit id="palettes.hero_header_palette.description">
+				<source>Define and alter the header for the hero section</source>
+			</trans-unit>
+			<trans-unit id="header.description">
+				<source>The header for the hero element</source>
+			</trans-unit>
+			<trans-unit id="header_size.label">
+				<source>header_size</source>
+			</trans-unit>
+			<trans-unit id="header_size.description">
+				<source>Select the size of the header text</source>
+			</trans-unit>
+			<trans-unit id="header_size.items.h1.label">
+				<source>Very large</source>
+			</trans-unit>
+			<trans-unit id="header_size.items.h2.label">
+				<source>Large</source>
+			</trans-unit>
+			<trans-unit id="header_size.items.h3.label">
+				<source>Medium</source>
+			</trans-unit>
+			<trans-unit id="header_size.items.h4.label">
+				<source>Small</source>
+			</trans-unit>
+			<trans-unit id="header_size.items.h5.label">
+				<source>Very small</source>
+			</trans-unit>
+			<trans-unit id="header_position.label">
+				<source>header_position</source>
+			</trans-unit>
+			<trans-unit id="header_position.description">
+				<source>Align the position of the header text</source>
+			</trans-unit>
+			<trans-unit id="header_position.items.label">
+				<source>Default</source>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-center.label">
+				<source>Center</source>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-right.label">
+				<source>Right</source>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-left.label">
+				<source>Left</source>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>A screen-wide image (limited to one image)</source>
+			</trans-unit>
+			<trans-unit id="bodytext.description">
+				<source>Inferior hero section text (below the header)</source>
+			</trans-unit>
+			<trans-unit id="palettes.hero_link_palette.description">
+				<source>Include a button to the hero element</source>
+			</trans-unit>
+			<trans-unit id="defaultButtonText.label">
+				<source>defaultButtonText</source>
+			</trans-unit>
+			<trans-unit id="defaultButtonText.description">
+				<source>Set text for the button</source>
+			</trans-unit>
+			<trans-unit id="palettes.hero_aos_palette.description">
+				<source>Set a scrolling animation for the element</source>
+			</trans-unit>
+			<trans-unit id="aos_type.label">
+				<source>aos_type</source>
+			</trans-unit>
+			<trans-unit id="aos_type.description">
+				<source>Select the scroll animation for the hero element</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.label">
+				<source>Default [no animation]</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade.label">
+				<source>Fade</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-up.label">
+				<source>Fade up</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-down.label">
+				<source>fade-down</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-left.label">
+				<source>Fade left</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-right.label">
+				<source>Fade right</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-up.label">
+				<source>Flip up</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-down.label">
+				<source>Flip down</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-left.label">
+				<source>Flip left</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-right.label">
+				<source>Flip right</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-up.label">
+				<source>Slide up</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-down.label">
+				<source>Slide down</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-left.label">
+				<source>Slide left</source>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-right.label">
+				<source>Slide right</source>
+			</trans-unit>
+			<trans-unit id="aos_animation_duration.label">
+				<source>aos_animation_duration</source>
+			</trans-unit>
+			<trans-unit id="aos_animation_duration.description">
+				<source>The header for the hero element</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

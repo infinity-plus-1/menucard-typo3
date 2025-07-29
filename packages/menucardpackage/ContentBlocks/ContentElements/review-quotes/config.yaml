@@ -1,0 +1,20 @@
+name: menucard/review-quotes
+typeName: menucard_reviewquotes
+group: default
+prefixFields: false
+prefixType: full
+fields:
+  - identifier: review_quotes
+    type: Collection
+    minitems: 1
+    appearance:
+      levelLinksPosition: both
+    fields:
+      - identifier: quote
+        type: Text
+        required: true
+        description: The quoted review text.
+      - identifier: customer_name
+        type: Text
+        required: true
+        description: The name of the reviewer.

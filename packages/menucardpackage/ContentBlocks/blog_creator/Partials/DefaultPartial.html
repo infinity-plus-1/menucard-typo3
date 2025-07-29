@@ -1,0 +1,36 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" xmlns:cb="http://typo3.org/ns/DS/CbBuilder/ViewHelpers" data-namespace-typo3-fluid="true" >
+
+<cb:dataprocessor source="db" tableName="sys_history" nested="true" where="actiontype == 1 && recuid == $recuid" variables="recuid: {data.uid}" order="uid DESC" as="processedData" />
+
+<f:for each="{processedData}" as="pData">
+  <f:if condition="{pData.tablename} == 'tt_content'">
+    <cb:dataprocessor source="db" tableName="be_users" nested="true" where="uid == $userid" variables="userid: {pData.userid}" order="uid DESC" as="userData" />
+  </f:if>
+</f:for>
+
+<f:if condition="{userData -> f:count()} == 1">
+  <cb:set value="{user: userData.0}" />
+  <cb:dataprocessor source="db" tableName="sys_file_reference" nested="true" where="tablenames == 'be_users' && fieldname == 'avatar' && uid_foreign == $userid" variables="userid: {user.uid}" order="uid DESC" as="fileRelation" />
+  <f:if condition="{fileRelation -> f:count()} == 1">
+    <cb:set value="{avatar: fileRelation.0}" />
+  </f:if>
+</f:if>
+
+<div class="author-info">
+  <h3 class="author-name">{f:if(condition: user, then: user.realName, else: data.header)}</h3>
+  <div class="author-details">
+    <f:if condition="{avatar}">
+      <f:then>
+        <f:image image="{avatar.file}" class="author-image" alt="Image of the author." />
+      </f:then>
+      <f:else>
+        <f:for each="{data.image}" as="image">
+          <f:image image="{image}" class="author-image" alt="Image of the author." />
+        </f:for>
+      </f:else>
+    </f:if>
+    <div class="author-bio"><f:format.html parseFuncTSPath="lib.parseFunc">{data.bodytext}</f:format.html></div>
+  </div>
+  <time datetime="{data.crdate}" class="post-date">Published on <f:format.date format="Y-m-d h:i:s A">{data.crdate}</f:format.date></time>
+</div>
+

@@ -1,0 +1,33 @@
+name: Textpicture
+identifier: textpicture
+description: Adjustable images and textarea.
+group: default
+placeAt: textmedia
+position: after
+classes: textpicDarkBgBrightFont
+fields:
+  - identifier: header
+    useExistingField: true
+    type: Text
+    required: true
+    description: The header for this element.
+    classes: ourStoryHeader1
+  - identifier: linebreak
+    type: Linebreak
+  - identifier: subheader
+    useExistingField: true
+    type: Text
+    description: The subheader.
+  - identifier: bodytext
+    useExistingField: true
+    type: Textarea
+    enableRichtext: true
+    classes: ourStoryText1
+  - identifier: image
+    type: File
+    useExistingField: true
+    allowed: common-image-types
+    classes: ourStoryImageFloatLeft33VW
+  - identifier: header_link
+    type: Link
+    useExistingField: true

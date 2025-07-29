@@ -1,0 +1,68 @@
+.img-responsive {
+    display: block;
+    height: auto;
+}
+
+.dishItem {
+    height: 6rem;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-pasta {
+    padding-left: 75px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-pasta::before {
+    background: url(icons/pasta-1-svgrepo-com.svg) no-repeat;
+    background-size: contain;
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 64px;
+    height: 64px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-appetisers {
+    padding-left: 75px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-appetisers::before {
+    background: url(icons/soup-svgrepo-com.svg) no-repeat;
+    background-size: contain;
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 64px;
+    height: 64px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-salads {
+    padding-left: 75px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-salads::before {
+    background: url(icons/salad-svgrepo-com.svg) no-repeat;
+    background-size: contain;
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 64px;
+    height: 64px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-steaks {
+    padding-left: 75px;
+}
+
+#fh5co-menus .fh5co-food-menu h2.fh5co-steaks::before {
+    background: url(icons/steak-svgrepo-com.svg) no-repeat;
+    background-size: contain;
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 64px;
+    height: 64px;
+}

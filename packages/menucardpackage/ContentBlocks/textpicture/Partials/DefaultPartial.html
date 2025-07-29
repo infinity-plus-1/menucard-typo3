@@ -1,0 +1,9 @@
+<div class="<cb:ClassPrinter value="main"></cb:ClassPrinter>">
+    <h2 class="<cb:ClassPrinter value="header"></cb:ClassPrinter>">{data.header}</h2>
+    <h4 class="<cb:ClassPrinter value="header"></cb:ClassPrinter>">{data.subheader}</h4>
+    <f:for each="{data.image}" as="img">
+        <img src="{img.publicUrl}" class="<cb:ClassPrinter value="image"></cb:ClassPrinter>" />
+    </f:for>
+    <div class="<cb:ClassPrinter value="bodytext"></cb:ClassPrinter>">{data.bodytext -> f:sanitize.html(build: 'default')}</div>
+    <div style="clear: both;"></div>
+</div>

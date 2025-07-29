@@ -1,0 +1,35 @@
+<html
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <h5>
+        <strong>
+            <be:link.editRecord uid="{data.uid}" table="{data.mainType}">{data.header}</be:link.editRecord>
+        </strong>
+    </h5>
+</f:section>
+
+<f:section name="Content">
+    {data.std_desc -> f:sanitize.html()}
+    <f:for each="{data.features_grid_collection}" as="item">
+        <HR />
+        <strong>{item.header_featured_item}</strong>
+        <BR />
+        {item.std_desc}
+        <BR />
+        Price: {item.item_price}$
+        <BR />
+        <f:image image="{item.image_featured_item.0}" maxWidth="150" />
+    </f:for>
+</f:section>
+
+<f:comment>
+<!-- Uncomment to override preview footer -->
+<f:section name="Footer">
+    My custom Footer
+</f:section>
+</f:comment>

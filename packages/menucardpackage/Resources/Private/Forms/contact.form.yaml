@@ -1,0 +1,86 @@
+
+renderingOptions:
+  submitButtonLabel: Submit
+type: Form
+identifier: contact
+label: Contact
+prototypeName: standard
+finishers:
+  -
+    options:
+      subject: 'Menucard has received your message'
+      recipients:
+        dennis.schwab90@icloud.com: Dennis
+      senderAddress: noreply@menucard.ddev.site
+      senderName: 'NoReply Menucard'
+      addHtmlPart: true
+      attachUploads: true
+      title: ''
+      replyToRecipients:
+        '{email-1}': '{text-1}'
+    identifier: EmailToSender
+  -
+    options:
+      pageUid: '434'
+      additionalParameters: ''
+      fragment: ''
+    identifier: Redirect
+renderables:
+  -
+    renderingOptions:
+      previousButtonLabel: 'Previous step'
+      nextButtonLabel: 'Next step'
+    type: Page
+    identifier: page-1
+    label: ''
+    renderables:
+      -
+        defaultValue: ''
+        type: Text
+        identifier: text-1
+        label: Name
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Firstname Lastname'
+            required: required
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Text
+        identifier: text-2
+        label: Subject
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Your request'
+            required: required
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Email
+        identifier: email-1
+        label: 'Email address'
+        properties:
+          fluidAdditionalAttributes:
+            required: required
+            placeholder: your@email.com
+        validators:
+          -
+            identifier: EmailAddress
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Textarea
+        identifier: textarea-1
+        label: 'Share your thoughts with us'
+        properties:
+          fluidAdditionalAttributes:
+            required: required
+            style: 'min-height: 200px;'
+        validators:
+          -
+            identifier: NotEmpty

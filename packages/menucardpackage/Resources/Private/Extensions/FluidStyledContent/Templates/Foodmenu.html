@@ -1,0 +1,118 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fh="http://typo3.org/ns/menucardvendor/menucardpackage/ViewHelpers" xmlns:fh="http://typo3.org/ns/DS/CbBuilder/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <f:asset.css identifier="foodmenuicons" href="EXT:menucardpackage/Resources/Public/ContentBlocks/menucard/foodmenu/icons.css"/>
+    <f:asset.css identifier="foodmenumain" href="EXT:menucardpackage/Resources/Public/ContentBlocks/menucard/foodmenu/main.css"/>
+    <fh:dataprocessor as="page" nested="true" />
+    <div id="fh5co-menus" data-section="menu" class="animated">
+        <div class="container">
+            <div class="row text-center fh5co-heading row-padded">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="foodmenu-header">
+                        <span class="{page.defaultButtonText} foodmenu-header-span"></span>
+                        <h2 class="foodmenu-header-h2 to-animate fadeInUp animated">{page.header}</h2>
+                    </div>
+                    
+                    <p class="sub-heading to-animate fadeInUp animated">{page.bodytext -> f:sanitize.html()}</p>
+                </div>
+            </div>
+            <f:for each="{page.menu_cols}" as="col" iteration="iterator">
+                <f:debug>{page}</f:debug>
+                <f:if condition="{iterator.isOdd}">
+                    <div class="row row-padded">
+                </f:if>
+                        <div class="col-md-6">
+                            <div class="to-animate-2 fadeIn animated">
+                                <div class="foodmenu-col-header">
+                                    <span class="{col.header_icon} foodmenu-col-span"></span>
+                                    <h2 class="foodmenu-col-header-h2">{col.header_col}</h2>
+                                </div>
+                                <ul class="foodmenu-col-ul">
+                                    <f:for each="{col.dishes}" as="dish" iteration="dishIterator">
+                                        <li class="foodmenu-col-li">
+                                            <div class="foodmenu-col-desc">
+                                                <figure>
+                                                    <f:image class="foodmenu-dish-img" alt="{dish.image_item.0.alternative}" image="{dish.image_item.0.file}" />
+                                                </figure>
+                                                <div class="foodmenu-col-header-desc">
+                                                    <h3>{dish.header_item}</h3>
+                                                    {dish.desc_item -> f:sanitize.html()}
+                                                </div>
+                                            </div>
+                                            <div class="foodmenu-col-pricing">
+                                                ${dish.price_item}
+                                            </div>
+                                        </li>
+                                    </f:for>
+                                </ul>
+
+
+                            <f:comment>
+                                
+                                    
+                                    <li>
+                                        <div class="fh5co-food-desc">
+                                            <figure>
+                                                <img src="images/res_img_6.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                            </figure>
+                                            <div>
+                                                <h3>Green Juice</h3>
+                                                <p>Far far away, behind the word mountains.</p>
+                                            </div>
+                                        </div>
+                                        <div class="fh5co-food-pricing">
+                                            $7.99
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="fh5co-food-desc">
+                                            <figure>
+                                                <img src="images/res_img_7.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                            </figure>
+                                            <div>
+                                                <h3>Soft Drinks</h3>
+                                                <p>Far far away, behind the word mountains.</p>
+                                            </div>
+                                        </div>
+                                        <div class="fh5co-food-pricing">
+                                            $12.99
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="fh5co-food-desc">
+                                            <figure>
+                                                <img src="images/res_img_5.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                            </figure>
+                                            <div>
+                                                <h3>Carlo Rosee Drinks</h3>
+                                                <p>Far far away, behind the word mountains.</p>
+                                            </div>
+                                        </div>
+                                        <div class="fh5co-food-pricing">
+                                            $12.99
+                                        </div>
+                                    </li>
+                                </ul>
+                            </f:comment>
+
+                            </div>
+                        </div>
+                <f:if condition="{iterator.isEven}">
+                    </div>
+                </f:if>
+            </f:for>
+
+            <f:comment>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center to-animate-2 fadeIn animated">
+                    <p><a href="#" class="btn btn-primary btn-outline">More Food Menu</a></p>
+                </div>
+            </div>
+            </f:comment>
+
+        </div>
+    </div>
+
+
+
+</f:spaceless>
+</html>

@@ -1,0 +1,39 @@
+.author-info {
+  border: 1px solid #ccc;
+  padding: 1em;
+  max-width: 350px;
+  font-family: Arial, sans-serif;
+}
+
+.author-name {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.author-details {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 0.8em;
+}
+
+.author-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.author-bio {
+  flex-grow: 1;
+  resize: none;
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  font-size: 0.9em;
+  font-family: inherit;
+  background-color: #f9f9f9;
+}
+.post-date {
+  font-size: 0.8em;
+  color: #666;
+}

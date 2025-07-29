@@ -1,0 +1,27 @@
+plugin {
+    tx_indexedsearch {
+        settings {
+            rootPidList = {$menucardextension.searchRootPagesPidList}
+            targetPid = {$menucardextension.searchResultsPid}
+            blind {
+                numberOfResults = 25
+            }
+            displayAdvancedSearchLink = 0
+        }
+        view {
+            partialRootPaths {
+                100 = EXT:menucardpackage/Resources/Private/IndexedSearch/Partials
+            }
+            templateRootPaths {
+                100 = EXT:menucardpackage/Resources/Private/IndexedSearch/Templates
+            }
+        }
+    }
+}
+
+lib.searchObj = RECORDS
+lib.searchObj {
+    tables = tt_content
+    source = {$menucardextension.searchFieldUid}
+    dontCheckPid = 1
+}

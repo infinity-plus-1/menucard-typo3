@@ -1,0 +1,41 @@
+config {
+    headerComment (
+Website is created for demo purposes by Dennis Schwab.
+    )
+}
+
+page {
+    headerData {
+        10 = TEXT
+        10.value (
+                <link href="{path:EXT:menucardpackage/Resources/Public/icons8-essen-100.png}" rel="icon">
+                <link href="{path:EXT:menucardpackage/Resources/Public/icons8-essen-100.png}" rel="apple-touch-icon">
+        )
+        10.insertData = 1
+        }
+
+    meta {
+        viewport = width=device-width, initial-scale=1.0
+    }
+
+    includeCSS {
+        animate = EXT:menucardpackage/Resources/Public/css/animate.css
+        icomoon = EXT:menucardpackage/Resources/Public/css/icomoon.css
+        simple-line-icons = EXT:menucardpackage/Resources/Public/css/simple-line-icons.css
+        bootstrap-datetimepicker = EXT:menucardpackage/Resources/Public/css/bootstrap-datetimepicker.min.css
+        bootstrap-datetimepicker.disableCompression = 1
+        flexslider = EXT:menucardpackage/Resources/Public/css/flexslider.css
+        bootstrap = EXT:menucardpackage/Resources/Public/css/bootstrap.css
+        style = EXT:menucardpackage/Resources/Public/css/style.css
+        navbar = EXT:menucardpackage/Resources/Public/css/navbar.css
+        bootstrap-icons = EXT:menucardpackage/Resources/Public/css/bootstrap-icons.min.css
+        bootstrap-icons.disableCompression = 1
+        glightboxcss = EXT:menucardpackage/Resources/Public/css/glightbox.min.css
+        glightboxcss.disableCompression = 1
+        aoscss = EXT:menucardpackage/Resources/Public/css/aos.min.css
+        aoscss.disableCompression = 1
+    }
+    includeJS {
+        modernizr = EXT:menucardpackage/Resources/Public/js/modernizr-2.6.2.min.js
+    }
+}

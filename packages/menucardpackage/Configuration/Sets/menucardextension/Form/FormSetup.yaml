@@ -1,0 +1,20 @@
+persistenceManager:
+  allowSaveToExtensionPaths: true
+  allowDeleteFromExtensionPaths: true
+  allowedExtensionPaths:
+    200: 'EXT:menucardpackage/Resources/Private/Forms'
+
+prototypes:
+  standard:
+    finishersDefinition:
+      EmailToReceiver:
+        implementationClassName: TYPO3\CMS\Form\Domain\Finishers\EmailFinisher
+        options:
+          templateName: 'ContactForm'
+          templateRootPaths:
+            200: 'EXT:menucardpackage/Resources/Private/Frontend/Templates/Finishers/Email/'
+    formElementsDefinition:
+      Form:
+        renderingOptions:
+          partialRootPaths:
+            200: 'EXT:menucardpackage/Resources/Private/Frontend/Partials/'

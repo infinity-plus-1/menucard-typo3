@@ -1,0 +1,82 @@
+name: menucard/features-grid
+typeName: menucard_featuresgrid
+group: default
+prefixFields: false
+prefixType: full
+fields:
+  - identifier: header
+    useExistingField: true
+  - identifier: std_desc
+    type: Text
+    description: Common featured items promotion text, below the header
+  - identifier: features_grid_collection
+    type: Collection
+    labelField: header_featured_item
+    minitems: 1
+    appearance:
+      levelLinksPosition: both
+    fields:
+      - identifier: header_featured_item
+        type: Text
+      - identifier: item_price
+        type: Number
+        format: decimal
+        default: 0.0
+      - identifier: std_desc
+        type: Text
+        description: Add a fancy item description
+        useExistingField: true
+      - identifier: image_featured_item
+        type: File
+        extendedPalette: false
+        minitems: 1
+        maxitems: 1
+        allowed: common-image-types
+        description: An image of the item
+      - identifier: std_checkbox
+        type: Checkbox
+        items:
+          - label: Highlight item
+  - identifier: hero_aos_palette
+    type: Palette
+    description: Set a scrolling animation for the element
+    fields:
+      - identifier: aos_type
+        type: Select
+        renderType: selectSingle
+        description: Select the scroll animation for the hero element
+        items:
+          - label: 'Default [no animation]'
+            value: 
+          - label: 'Fade'
+            value: fade
+          - label: 'Fade up'
+            value: fade-up
+          - label: 'fade-down'
+            value: fade-down
+          - label: 'Fade left'
+            value: fade-left
+          - label: 'Fade right'
+            value: fade-right
+          - label: 'Flip up'
+            value: flip-up
+          - label: 'Flip down'
+            value: flip-down
+          - label: 'Flip left'
+            value: flip-left
+          - label: 'Flip right'
+            value: flip-right
+          - label: 'Slide up'
+            value: slide-up
+          - label: 'Slide down'
+            value: slide-down
+          - label: 'Slide left'
+            value: slide-left
+          - label: 'Slide right'
+            value: slide-right
+      - type: Linebreak
+      - identifier: aos_animation_duration
+        type: Text
+        required: true
+        description: The header for the hero element
+        default: 100

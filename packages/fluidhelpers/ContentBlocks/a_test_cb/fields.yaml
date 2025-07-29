@@ -1,0 +1,22 @@
+name: A Test Cb
+identifier: a_test_cb
+description: This is the content block A Test Cb
+group: default
+placeAt: textmedia
+position: after
+fields:
+  
+  - identifier: header
+    useExistingField: true
+    type: Text
+    required: true
+    description: The header for this element.
+    classes: aCbTestClass1
+  - identifier: linebreak
+    type: Linebreak
+  - identifier: bodytext
+    useExistingField: true
+    type: Textarea
+    enableRichtext: true
+    description: The main text area of this element.
+    

@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="labels.xlf" source-language="en" target-language="de" date="2025-04-15T15:16:05+00:00" product-name="menucard/hero">
+		<header/>
+		<body>
+			<trans-unit id="title">
+				<source>Hero</source>
+				<target>Hero</target>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Create a hero element with a screen-wide image, a header and an optional subtext</source>
+				<target>Erstelle ein Hero-Element mit einem bildschirmbreiten Bild, einer Überschrift und einem optionalen Untertitel.</target>
+			</trans-unit>
+			<trans-unit id="palettes.hero_header_palette.description">
+				<source>Define and alter the header for the hero section</source>
+				<target>Den Überschriftentext erstellen und modifizieren</target>
+			</trans-unit>
+			<trans-unit id="header.description">
+				<source>The header for the hero element</source>
+				<target>Der Überschriftentext</target>
+			</trans-unit>
+			<trans-unit id="header_size.label">
+				<source>Size of the header</source>
+				<target>Größe der Überschrift</target>
+			</trans-unit>
+			<trans-unit id="header_size.description">
+				<source>Select the size of the header text</source>
+				<target>Wählen Sie die Größe der Überschrift</target>
+			</trans-unit>
+			<trans-unit id="header_size.items.h1.label">
+				<source>Very large</source>
+				<target>Sehr groß</target>
+			</trans-unit>
+			<trans-unit id="header_size.items.h2.label">
+				<source>Large</source>
+				<target>Groß</target>
+			</trans-unit>
+			<trans-unit id="header_size.items.h3.label">
+				<source>Medium</source>
+				<target>Mittel</target>
+			</trans-unit>
+			<trans-unit id="header_size.items.h4.label">
+				<source>Small</source>
+				<target>Klein</target>
+			</trans-unit>
+			<trans-unit id="header_size.items.h5.label">
+				<source>Very small</source>
+				<target>Sehr klein</target>
+			</trans-unit>
+			<trans-unit id="header_position.label">
+				<source>header_position</source>
+				<target>header_position</target>
+			</trans-unit>
+			<trans-unit id="header_position.description">
+				<source>Align the position of the header text</source>
+				<target>Die Position des Überschriftentext setzen</target>
+			</trans-unit>
+			<trans-unit id="header_position.items.label">
+				<source>Default</source>
+				<target>Standard</target>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-center.label">
+				<source>Center</source>
+				<target>Zentriert</target>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-right.label">
+				<source>Right</source>
+				<target>Rechts</target>
+			</trans-unit>
+			<trans-unit id="header_position.items.ce-headline-left.label">
+				<source>Left</source>
+				<target>Links</target>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>A screen-wide image (limited to one image)</source>
+				<target>Das Hero-Bild (es kann nur eines ausgewählt werden)</target>
+			</trans-unit>
+			<trans-unit id="bodytext.description">
+				<source>Inferior hero section text (below the header)</source>
+				<target>Text unter der Überschrift</target>
+			</trans-unit>
+			<trans-unit id="palettes.hero_link_palette.description">
+				<source>Include a button to the hero element</source>
+				<target>Einen Button zum Hero-Element hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="defaultButtonText.label">
+				<source>defaultButtonText</source>
+				<target>defaultButtonText</target>
+			</trans-unit>
+			<trans-unit id="defaultButtonText.description">
+				<source>Set text for the button</source>
+				<target>Standardtext des Button</target>
+			</trans-unit>
+			<trans-unit id="palettes.hero_aos_palette.description">
+				<source>Set a scrolling animation for the element</source>
+				<target>Scroll-Animation für das Element auswählen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.label">
+				<source>aos_type</source>
+				<target>aos_type</target>
+			</trans-unit>
+			<trans-unit id="aos_type.description">
+				<source>Select the scroll animation for the hero element</source>
+				<target>Scroll-Animation für das Element auswählen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.label">
+				<source>Default [no animation]</source>
+				<target>Default [no animation]</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade.label">
+				<source>Fade</source>
+				<target>Schwinden lassen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-up.label">
+				<source>Fade up</source>
+				<target>Oben schwinden</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-down.label">
+				<source>fade-down</source>
+				<target>Unten schwinden</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-left.label">
+				<source>Fade left</source>
+				<target>Links schwinden</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.fade-right.label">
+				<source>Fade right</source>
+				<target>Rechts schwinden</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-up.label">
+				<source>Flip up</source>
+				<target>Oben drehen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-down.label">
+				<source>Flip down</source>
+				<target>Unten drehen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-left.label">
+				<source>Flip left</source>
+				<target>Links drehen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.flip-right.label">
+				<source>Flip right</source>
+				<target>Rechts drehen</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-up.label">
+				<source>Slide up</source>
+				<target>Oben gleiten</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-down.label">
+				<source>Slide down</source>
+				<target>Unten gleiten</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-left.label">
+				<source>Slide left</source>
+				<target>Links gleiten</target>
+			</trans-unit>
+			<trans-unit id="aos_type.items.slide-right.label">
+				<source>Slide right</source>
+				<target>Rechts gleiten</target>
+			</trans-unit>
+			<trans-unit id="aos_animation_duration.label">
+				<source>aos_animation_duration</source>
+				<target>aos_animation_duration</target>
+			</trans-unit>
+			<trans-unit id="aos_animation_duration.description">
+				<source>The animation duration</source>
+				<target>Die Dauer der Animation</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

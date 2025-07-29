@@ -1,0 +1,76 @@
+name: Menucards
+identifier: menucards
+description: Create a menucard
+group: default
+placeAt: textmedia
+position: after
+fields:
+  - identifier: header
+    useExistingField: true
+    type: Text
+    required: true
+    max: 255
+    description: The header for this element.
+  - identifier: linebreak
+    type: Linebreak
+  - identifier: subheader
+    useExistingField: true
+    type: Text
+    max: 255
+    description: A short description.
+  - identifier: menucard_columns
+    type: Collection
+    appearance:
+      levelLinksPosition: both
+    description: Define columns for specific types of food. Like Steaks, Noodles, Drinks, etc.
+    fields:
+      - identifier: headerType
+        type: Text
+        description: The column header
+      - identifier: columnIcon
+        type: Select
+        renderType: selectSingle
+        items:
+          -
+            label: Drinks
+            value: drinks
+          -
+            label: Appetisers
+            value: appetisers
+          -
+            label: Pasta
+            value: pasta
+          -
+            label: Salads
+            value: salads
+          -
+            label: Burgers
+            value: burgers
+          -
+            label: Pizza
+            value: pizza
+          -
+            label: Steaks
+            value: steaks
+      - identifier: menucard_rows
+        type: Collection
+        classes: dishItem
+        appearance:
+          levelLinksPosition: both
+        description: Add dishes of every food category.
+        fields:
+          - identifier: dishHeader
+            type: Text
+            required: true
+            max: 255
+            description: The name of the dish
+          - identifier: dishDesc
+            type: Text
+            description: A short description.
+            max: 255
+          - identifier: price
+            type: Number
+            format: decimal
+          - identifier: image
+            type: File
+            allowed: common-image-types

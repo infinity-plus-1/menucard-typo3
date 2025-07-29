@@ -1,0 +1,39 @@
+page {
+    includeJSFooter {
+        jquery = EXT:menucardpackage/Resources/Public/js/jquery.min.js
+        jquery.disableCompression = 1
+        jquery-easing = EXT:menucardpackage/Resources/Public/js/jquery.easing.1.3.js
+        bootstrap = EXT:menucardpackage/Resources/Public/js/bootstrap.js
+        moment = EXT:menucardpackage/Resources/Public/js/moment.js
+        bootstrap-datetimepicker = EXT:menucardpackage/Resources/Public/js/bootstrap-datetimepicker.min.js
+        bootstrap-datetimepicker.disableCompression = 1
+        waypoints = EXT:menucardpackage/Resources/Public/js/jquery.waypoints.min.js
+        waypoints.disableCompression = 1
+        stellar = EXT:menucardpackage/Resources/Public/js/jquery.stellar.min.js
+        stellar.disableCompression = 1
+        flexslider = EXT:menucardpackage/Resources/Public/js/jquery.flexslider-min.js
+        flexslider.disableCompression = 1
+        main = EXT:menucardpackage/Resources/Public/js/main.js
+        glightbox = EXT:menucardpackage/Resources/Public/js/glightbox.min.js
+        glightbox.disableCompression = 1
+        aos = EXT:menucardpackage/Resources/Public/js/aos.min.js
+        aos.disableCompression = 1
+    }
+
+    footerData {
+        10 = TEXT
+        10.value (
+            <script>
+                $(function () {
+                    $('#date').datetimepicker();
+                });
+                const lightbox = GLightbox({
+                    touchNavigation: true,
+                    loop: true,
+                    autoplayVideos: true
+                });
+                AOS.init();
+            </script>
+        )
+    }
+}

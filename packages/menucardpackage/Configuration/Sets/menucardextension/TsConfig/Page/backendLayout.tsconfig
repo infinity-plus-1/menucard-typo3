@@ -1,0 +1,81 @@
+mod.web_layout.BackendLayouts {
+    2-1-Col {
+        title = 2-1 Layout for the blog section
+        # icon = content-container-columns-2
+        config {
+            backend_layout {
+                colCount = 3
+                rowCount = 2
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = 2-1-Layout
+                                colspan = 2
+                                colPos = 0
+                            }
+                            2 {
+                                name = 1-2-Col
+                                colPos = 1
+                            }
+                        }
+                    }
+                    2 {
+                        columns {
+                            1 {
+                                name = footerLeft
+                                colPos = 2
+                            }
+                            2 {
+                                name = footerCenter
+                                colPos = 3
+                            }
+                            3 {
+                                name = footerRight
+                                colPos = 4
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    default {
+        title = Default layout
+        # icon = content-container-columns-2
+        config {
+            backend_layout {
+                colCount = 3
+                rowCount = 2
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                identifier = main
+                                name = Standard
+                                colspan = 3
+                                colPos = 0
+                            }
+                        }
+                    }
+                    2 {
+                        columns {
+                            1 {
+                                name = footerLeft
+                                colPos = 2
+                            }
+                            2 {
+                                name = footerCenter
+                                colPos = 3
+                            }
+                            3 {
+                                name = footerRight
+                                colPos = 4
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

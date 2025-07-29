@@ -1,0 +1,50 @@
+<html
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:fh="http://typo3.org/ns/DS/CbBuilder/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    <fh:dataprocessor source="db" nested="true" where="uid > $uid && (pid == 20 || pid == $piddyBoy1)" variables="piddyBoy1: 5, uid: 60" order="uid DESC, pid DESC" as="ttcontent" />
+</f:comment>
+<fh:dataprocessor source="page" nested="true" as="processedData" />
+
+<fh:set>number: 3000</fh:set>    <fh:set value="myExp: '= 55%10'" mergeFields="{number2: 2000}" />
+
+
+<BR />
+<BR />
+
+
+<div class="container text-center">
+    <f:for each="{processedData.menu_cols}" as="col" iteration="iterator">
+        <fh:set value="isMod3: '= $index$%3'" mergeFields="{index: iterator.index}" />
+        <f:if condition="{isMod3} == 0">
+            <div class="row">
+        </f:if>
+                <div class="col">
+                <div class="col">
+                    <h3>{col.header_col}</h3>
+                </div>
+                <f:for each="{col.dishes}" as="dish">
+                    <div class="col">
+                        <p>{dish.header_item} - {dish.price_item}$</p>
+                    </div>
+                </f:for>
+            </div>
+        
+        <f:if condition="{isMod3} == 2">
+            </div>
+        </f:if>
+        
+    </f:for>
+    <f:if condition="{isMod4} != 2">
+        </div>
+    </f:if>
+</div>
+
+<table>
+    <tr>
+        
+    </tr>
+</table>

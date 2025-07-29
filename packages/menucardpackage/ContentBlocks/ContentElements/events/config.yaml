@@ -1,0 +1,35 @@
+name: ds/events
+typeName: ds_events
+group: default
+prefixFields: false
+prefixType: full
+basics:
+    - TYPO3/Appearance
+fields:
+  -
+    identifier: header
+    useExistingField: true
+  -
+    identifier: subheader
+    useExistingField: true
+  -
+    identifier: eventBgImage
+    type: File
+    allowed: common-image-types
+  -
+    identifier: events
+    type: Collection
+    fields:
+      -
+        identifier: eventHeader
+        required: true
+        type: Text
+      -
+        identifier: eventSchedule
+        type: DateTime
+        format: date
+        required: true
+      -
+        identifier: eventDesc
+        type: Textarea
+        enableRichtext: true

@@ -1,0 +1,37 @@
+<div id="fh5co-about" class="fh5co-about-height" data-section="about" data-aos="{data.aos_type}" data-aos-duration="{data.aos_animation_duration}">
+    <div class="fh5co-2col fh5co-bg" style="background-image: url(<f:uri.image image="{data.image.0}" />)"></div>
+    <div class="fh5co-2col fh5co-text">
+        <!-- Header -->
+        <h2 class="heading to-animate fadeInUp animated">{data.header}</h2>
+        <!-- End header -->
+        <div class="to-animate fadeInUp animated">
+            <span class="fh5co-text-firstchar"><cb:Substr
+                value="{data.bodytext}"
+                offset="0"
+                length="1"
+                stripTags="true"
+            ></cb:Substr></span><span class="fh5co-text-text"><cb:Substr
+                value="{data.bodytext}"
+                offset="1"
+                stripTags="true"
+            ></cb:Substr></span>
+        </div>
+        <f:if condition="{data.header_link} && {data.defaultButtonText}">
+            <p class="text-center to-animate">
+                <f:link.typolink parameter="{data.header_link}" class="btn btn-primary btn-outline">
+                    {data.defaultButtonText}
+                </f:link.typolink>
+            </p>
+        </f:if>
+        <p class="text-center to-animate fadeInUp animated">
+            <f:link.typolink
+                class="btn btn-primary btn-outline"
+                parameter="{data.header_link}"
+            >
+                {data.subheader}
+            </f:link.typolink>
+        </p>
+    </div>
+
+    
+</div>

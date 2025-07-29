@@ -1,0 +1,128 @@
+categories:
+  menucardextension:
+    label: 'Menucard extension'
+
+  # Unique IDs of various pages
+  menucardextension-pageUids:
+    label: 'Defined uid constants of pages'
+    parent: menucardextension
+  
+  # Contact button
+  menucardextension-contactButton:
+    label: 'Settings of the contact button for customized orders'
+    parent: menucardextension
+  
+  # Footer copyright
+  menucardextension-footerCopyright:
+    label: 'Copyright text of the footer section'
+    parent: menucardextension
+
+  # Footer social media
+  menucardextension-socialMediaFooter:
+    label: 'Icons and links for social media used by the footer section'
+    parent: menucardextension
+
+  # IDs and other stuff for the search field of the website
+  menucardextension-searchField:
+    label: 'IDs and other stuff for the search field of the website'
+    parent: menucardextension
+
+settings:
+  
+  # Unique IDs of various pages
+  menucardextension.footerMetaUid:
+    default: 14
+    type: int
+    label: 'Uid of the footer menu separator'
+    category: menucardextension-pageUids
+
+  # Contact button
+  menucardextension.contactButtonText:
+    default: ''
+    type: string
+    label: 'Text of the contact button'
+    category: menucardextension-contactButton
+  menucardextension.contactButtonValue:
+    default: ''
+    type: string
+    label: 'Value of the contact button'
+    category: menucardextension-contactButton
+
+  # Footer copyright
+  menucardextension.footerCopyrightText:
+    default: 'Foodee Free HTML5 Template. and Dennis Schwab'
+    type: string
+    label: 'Copyright text'
+    category: menucardextension-footerCopyright
+
+  # Footer social media - Icons and links 1-n
+
+    # Element 1
+  menucardextension.menucardextension-socialMediaFooter.element1.footerSocialMediaLogo:
+    default: 'bi-facebook'
+    type: string
+    label: 'Social media logo 1'
+    category: menucardextension-socialMediaFooter
+    enum:
+      'bi-facebook': 'Facebook'
+      'bi-twitter-x': 'Twitter-X'
+      'bi-instagram': 'Instagram'
+  menucardextension.menucardextension-socialMediaFooter.element1.footerSocialMediaLink:
+    default: 'https://facebook.com'
+    type: string
+    label: 'Social media link 1'
+    category: menucardextension-socialMediaFooter
+
+    # Element 2
+  menucardextension.menucardextension-socialMediaFooter.element2.footerSocialMediaLogo:
+    default: 'bi-twitter-x'
+    type: string
+    label: 'Social media logo 2'
+    category: menucardextension-socialMediaFooter
+    enum:
+      'bi-facebook': 'Facebook'
+      'bi-twitter-x': 'Twitter-X'
+      'bi-instagram': 'Instagram'
+  menucardextension.menucardextension-socialMediaFooter.element2.footerSocialMediaLink:
+    default: 'https://x.com'
+    type: string
+    label: 'Social media link 2'
+    category: menucardextension-socialMediaFooter
+  
+    # Element 3
+  menucardextension.menucardextension-socialMediaFooter.element3.footerSocialMediaLogo:
+    default: 'bi-instagram'
+    type: string
+    label: 'Social media logo 3'
+    category: menucardextension-socialMediaFooter
+    enum:
+      'bi-facebook': 'Facebook'
+      'bi-twitter-x': 'Twitter-X'
+      'bi-instagram': 'Instagram'
+  menucardextension.menucardextension-socialMediaFooter.element3.footerSocialMediaLink:
+    default: 'https://instagram.com'
+    type: string
+    label: 'Social media link 3'
+    category: menucardextension-socialMediaFooter
+
+
+  # Indexed search
+  # The Uid of the page to display the results from the indexed search
+  menucardextension.searchResultsPid:
+    default: 433
+    type: int
+    label: 'The Uid of the page to display the results from the indexed search'
+    category: menucardextension-searchField
+
+  # A list of root pages to include and start the search from
+  menucardextension.searchRootPagesPidList:
+    default: '5'
+    type: string
+    label: 'A list of root pages to include and start the search from'
+    category: menucardextension-searchField
+  
+  menucardextension.searchFieldUid:
+    default: 172
+    type: int
+    label: 'The uid of the table entry of the indexed search'
+    category: menucardextension-searchField

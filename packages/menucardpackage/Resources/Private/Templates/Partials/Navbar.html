@@ -1,0 +1,63 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+        <f:link.typolink parameter="/">
+            {siteIcon -> f:format.raw()}
+        </f:link.typolink>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <f:for each="{navbar}" as="page">
+                    <f:render section="navbarLiElement" arguments="{_all}" />
+                    <f:if condition="{page.hasSubpages}">
+                        <f:render section="navbarSubList" arguments="{_all}" />
+                    </f:if>
+                </f:for>
+                <f:if condition="{settings.menucardextension.contactButtonText} && {settings.menucardextension.contactButtonValue}">
+                    <li id="contactButton">
+                        <f:link.typolink parameter="{settings.menucardextension.contactButtonValue}" class="btn btn-primary">
+                            {settings.menucardextension.contactButtonText}
+                        </f:link.typolink>
+                    </li>
+                    
+                </f:if>
+                <li>
+                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="searchLoupe">
+                        <title>Search</title>
+                        <path d="M457,138.31A156.65,156.65,0,1,0,187.91,293.92l-139,139a21.33,21.33,0,1,0,30.16,30.17l139-139A156.67,156.67,0,0,0,457,138.31ZM312.72,313.23a114,114,0,1,1,114-114A114.07,114.07,0,0,1,312.72,313.23Z"></path>
+                    </svg>
+                </li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+    </div>
+
+    <f:section name="navbarLiElement">
+        <li {f:if(condition: page.hasSubpages, then: 'class="dropdown"')}>
+            <f:link.typolink parameter="{page.data.uid}" class="{f:if(condition: page.active, then: 'active')}">
+                {f:if(condition: page.hasSubpages, then: '<span>')}
+                    {page.title}
+                {f:if(condition: page.hasSubpages, then: '</span> <i class="bi bi-chevron-down toggle-dropdown"></i>')}
+        </f:link.typolink>
+    </f:section>
+
+    <f:section name="navbarSubList">
+        <f:for each="{page.children}" as="page">
+            <ul>
+                <f:render section="navbarLiElement" arguments="{_all}" />
+                <f:if condition="{page.hasSubpages}">
+                    <f:render section="navbarSubList" arguments="{_all}" />
+                </f:if>    
+                </li>
+            </ul>
+        </f:for>
+    </f:section>
+    
+    <div class="searchModal">
+        <div class="searchBoxBg"></div>
+        <div class="searchBox">
+            <f:cObject typoscriptObjectPath="lib.searchObj" />
+        </div>
+    </div>
+
+</f:spaceless>
+</html>

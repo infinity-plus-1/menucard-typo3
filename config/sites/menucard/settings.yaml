@@ -1,0 +1,13 @@
+styles:
+  templates:
+    layoutRootPath: 'EXT:menucardpackage/Resources/Private/Extensions/FluidStyledContent/Layouts/'
+    partialRootPath: 'EXT:menucardpackage/Resources/Private/Extensions/FluidStyledContent/Partials/'
+    templateRootPath: 'EXT:menucardpackage/Resources/Private/Extensions/FluidStyledContent/Templates/'
+  content:
+    textmedia:
+      linkWrap:
+        lightboxEnabled: false
+menucardextension:
+  contactButtonText: 'Contact us'
+  contactButtonValue: 't3://page?uid=16#173'
+  footerCopyrightText: 'Foodee Free HTML5 Template and Dennis Schwab'

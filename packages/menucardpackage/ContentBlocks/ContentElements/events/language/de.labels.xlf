@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="labels.xlf" source-language="en" target-language="de" date="2025-04-18T17:43:40+00:00" product-name="ds/events">
+		<header/>
+		<body>
+			<trans-unit id="title">
+				<source>Events</source>
+				<target>Events</target>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Create an upcoming events section</source>
+				<target>Erstellen einer Kommende-Events-Sektion</target>
+			</trans-unit>
+			<trans-unit id="eventBgImage.label">
+				<source>Background image</source>
+				<target>Hintergrundbild</target>
+			</trans-unit>
+			<trans-unit id="events.label">
+				<source>Create a new event</source>
+				<target>Erstellen eines neuen Events</target>
+			</trans-unit>
+			<trans-unit id="events.eventHeader.label">
+				<source>Header text of the event</source>
+				<target>Überschriftentext für das Event</target>
+			</trans-unit>
+			<trans-unit id="events.eventSchedule.label">
+				<source>Date of the event</source>
+				<target>Terminierung des Events</target>
+			</trans-unit>
+			<trans-unit id="events.eventDesc.label">
+				<source>Description for the event</source>
+				<target>Beschreibung für das Event</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

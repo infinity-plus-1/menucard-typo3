@@ -1,0 +1,26 @@
+name: Blog Creator
+identifier: blog_creator
+description: Easily add creator information for a blog post.
+group: default
+placeAt: textmedia
+position: after
+fields:
+  
+  - identifier: header
+    useExistingField: true
+    type: Text
+    required: false
+    description: (Optional) The name of the Author.
+  - identifier: linebreak
+    type: Linebreak
+  - identifier: bodytext
+    useExistingField: true
+    type: Textarea
+    required: true
+    enableRichtext: true
+    description: Add some information about the author.
+  - identifier: image
+    useExistingField: true
+    type: File
+    description: (Optional) Upload the image of the author.
+    allowed: common-image-types     
