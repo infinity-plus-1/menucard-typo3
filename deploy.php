@@ -12,8 +12,8 @@ require 'contrib/rsync.php';
 // Include hosts
 import('.hosts.yml');
 
-set('http_user', 'USERNAME');
-set('http_group', 'GROUP');
+set('http_user', 'www-data');
+set('http_group', 'www-data');
 
 set('/usr/local/bin/php', 'php');
 set('bin/typo3', '{{release_path}}/vendor/bin/typo3');
@@ -28,16 +28,26 @@ set('typo3_webroot', 'public');
 $sharedDirectories = [
     '{{typo3_webroot}}/fileadmin',
     '{{typo3_webroot}}/typo3temp',
+    'config',
+    'var',
 ];
 set('shared_dirs', $sharedDirectories);
 
 // Set shared files
 $sharedFiles = [
     '{{typo3_webroot}}/.htaccess',
-    'config/system/additional.php',
-    'config/system/.env',
 ];
 set('shared_files', $sharedFiles);
+
+// Set writable directories
+set('writable_dirs', [
+    'config',
+    '{{typo3_webroot}}/fileadmin',
+    '{{typo3_webroot}}/typo3temp',
+    '{{typo3_webroot}}/typo3conf',
+    '{{typo3_webroot}}/uploads',
+    
+]);
 
 // Define all rsync excludes
 $exclude = [
@@ -136,11 +146,22 @@ after('deploy:symlink', function () {
     invoke('typo3:cache_warmup');
 });
 
+//Cleanup task
+desc('Cleanup old releases');
+task('cleanup', function () {
+    run("cd {{deploy_path}} && if [ -d releases ]; then ls -dt releases/* | tail -n +{{keep_releases}} | xargs -r rm -rf; fi");
+});
+
 // Main deployment task
 desc('Deploy TYPO3 project');
 task('deploy', [
     'deploy:prepare',
-    'deploy:publish',
+    'deploy:update_code',        // Code via rsync aktualisieren
+    'deploy:shared',             // Shared files/dirs verlinken
+    'deploy:vendors',            // composer install (vendor Ordner)
+    'deploy:writable',           // Schreibrechte setzen
+    'deploy:symlink',            // Symlink auf neues Release setzen
+    'cleanup',                   // Alte Releases entfernen
 ]);
 
 // Unlock on failed deployment
