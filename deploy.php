@@ -149,19 +149,26 @@ after('deploy:symlink', function () {
 //Cleanup task
 desc('Cleanup old releases');
 task('cleanup', function () {
-    run("cd {{deploy_path}} && if [ -d releases ]; then ls -dt releases/* | tail -n +{{keep_releases}} | xargs -r rm -rf; fi");
+    run("cd {{deploy_path}} && if [ -d releases ]; then ls -dt releases/* | tail -n +{{keep_releases}} | xargs -r rm -rf; fi && rm /var/www/html/typo3project/.dep/deploy.lock");
+});
+
+//Remove deploy lock
+desc('Remove deploy lock');
+task('remove_lock', function () {
+    run('rm -f {{deploy_path}}/.dep/deploy.lock');
 });
 
 // Main deployment task
 desc('Deploy TYPO3 project');
 task('deploy', [
     'deploy:prepare',
-    'deploy:update_code',        // Code via rsync aktualisieren
-    'deploy:shared',             // Shared files/dirs verlinken
-    'deploy:vendors',            // composer install (vendor Ordner)
-    'deploy:writable',           // Schreibrechte setzen
-    'deploy:symlink',            // Symlink auf neues Release setzen
-    'cleanup',                   // Alte Releases entfernen
+    'deploy:update_code', 
+    'deploy:shared',
+    'deploy:vendors',
+    'deploy:writable',
+    'deploy:symlink',
+    'cleanup',
+    'remove_lock',
 ]);
 
 // Unlock on failed deployment
