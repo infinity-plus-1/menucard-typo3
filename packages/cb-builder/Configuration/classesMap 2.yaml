@@ -1,0 +1,23 @@
+new_content_block:
+  header:
+    - headerclass1
+    - headerclass2
+  table1:
+    'text1 label':
+      - testClass1
+    date1:
+      - aClassInNewCss1
+    table2:
+      textInTable2:
+        - textincol2Class1
+        - textincol2Class2
+        - textincol2Class3
+eegrohrhr:
+  header:
+    - test123
+    - test1234
+  bodytext:
+    - test12345
+a_test_cb:
+  header:
+    - aCbTestClass1

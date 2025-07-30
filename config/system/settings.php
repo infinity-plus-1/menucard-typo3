@@ -1,4 +1,10 @@
 <?php
+
+use Symfony\Component\Dotenv\Dotenv;
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env', overrideExistingVars: true);
+
 return [
     'BE' => [
         'debug' => true,
@@ -13,6 +19,15 @@ return [
             'Default' => [
                 'charset' => 'utf8',
                 'driver' => 'mysqli',
+                'dbname' => 'db',
+                'defaultTableOptions' => [
+                    'charset' => 'utf8mb4',
+                    'collation' => 'utf8mb4_unicode_ci',
+                ],
+                'user' => $_ENV['DB_USER'] ?? 'db',
+                'password' => $_ENV['DB_PW'] ?? 'db',
+                'host' => $_ENV['DB_HOST'] ?? 'db',
+                'port' => $_ENV['DB_PORT'] ?? '3306',
             ],
         ],
     ],

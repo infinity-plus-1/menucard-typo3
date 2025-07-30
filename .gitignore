@@ -5,6 +5,7 @@ __composer 2.json
 .DS_Store
 .idea
 .vscode
+.env
 /var/*
 !/var/labels
 /vendor
@@ -17,4 +18,3 @@ __composer 2.json
 database.sql
 db.sql
 fetchdatabase.sh
-/packages/cb-builder

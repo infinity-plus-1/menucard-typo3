@@ -1,0 +1,31 @@
+contentBlocks:
+  textpicture:
+    identifier: textpicture
+    name: Textpicture
+    key: menucardpackage
+    path: /var/www/html/packages/menucardpackage
+    extension: menucardpackage
+    description: 'Adjustable images and textarea.'
+    placeAt: textmedia
+    position: after
+    group: default
+  menucards:
+    identifier: menucards
+    name: Menucards
+    key: menucardpackage
+    path: /var/www/html/packages/menucardpackage
+    extension: menucardpackage
+    description: 'Create a menucard'
+    placeAt: textmedia
+    position: after
+    group: default
+  blog_creator:
+    identifier: blog_creator
+    name: 'Blog Creator'
+    key: menucardpackage
+    path: /var/www/html/packages/menucardpackage
+    extension: menucardpackage
+    description: 'Easily add creator information for a blog post.'
+    placeAt: textmedia
+    position: after
+    group: default

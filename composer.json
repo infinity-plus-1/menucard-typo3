@@ -40,7 +40,8 @@
         "menucardvendor/menucardpackage": "@dev",
         "ds/fluidhelpers": "@dev",
         "ds/cb-builder": "@dev",
-        "friendsoftypo3/content-blocks": "^1.1"
+        "friendsoftypo3/content-blocks": "^1.1",
+        "symfony/dotenv": "^7.3"
     },
     "config": {
         "allow-plugins": {

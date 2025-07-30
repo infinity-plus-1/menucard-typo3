@@ -1,0 +1,3 @@
+[submodule "packages/cb-builder"]
+	path = packages/cb-builder
+	url = https://github.com/infinity-plus-1/CbBuilder.git

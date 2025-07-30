@@ -1,0 +1,6 @@
+hosts:
+  production:
+    hostname: 'deimos-crm.de'
+    remote_user: 'root'
+    port: 22
+    deploy_path: '/var/www/html/typo3project'

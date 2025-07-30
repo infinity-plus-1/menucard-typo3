@@ -1,0 +1,31 @@
+<html
+	xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:cb="http://typo3.org/ns/DS/CbBuilder/ViewHelpers"
+	data-namespace-typo3-fluid="true"
+>
+
+
+
+<!-- DO NOT DELETE ANYTHING BETWEEN THIS -->
+<!-- USE PARTIALS TO RENDER THE CONTENT BLOCK -->
+<f:spaceless>
+	<f:layout name="Default" />
+	<f:section name="Main">
+
+<!--&%!§(§?%&eegrohrhr&%?§)§!%& DO NOT DELTE THIS PART--> 
+<f:asset.css identifier="cb_eegrohrhr_fe_main2_css" href="EXT:cb_builder/Resources/Public/cb/eegrohrhr/assets/frontend/main2.css" />
+<f:asset.css identifier="cb_eegrohrhr_fe_main_css" href="EXT:cb_builder/Resources/Public/cb/eegrohrhr/assets/frontend/main.css" />
+
+<!--&%!§(§?%&eegrohrhr&%?§)§!%& DO NOT DELTE THIS PART-->
+		<f:if condition="{cbData} && {cbData.partial}">
+			<f:then>
+				<f:render partial="{cbData.partial}" arguments="{_all}" />
+			</f:then>
+			<f:else>
+				<f:render partial="DefaultPartial" arguments="{_all}" />
+			</f:else>
+		</f:if>
+		
+	</f:section>
+</f:spaceless>
+<!-- AND THIS LINE -->

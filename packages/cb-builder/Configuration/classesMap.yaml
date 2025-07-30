@@ -1,0 +1,14 @@
+textpicture:
+  header:
+    - ourStoryHeader1
+  bodytext:
+    - ourStoryText1
+  image:
+    - ourStoryImageFloatLeft33VW
+  main:
+    - textpicDarkBgBrightFont
+menucards:
+  menucard_columns:
+    menucard_rows:
+      - dishItem
+blog_creator: {  }
