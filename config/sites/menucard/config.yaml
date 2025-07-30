@@ -1,4 +1,8 @@
-base: 'https://menucard.ddev.site/'
+base: typo3demo.deimos-crm.de
+baseVariants:
+  -
+    base: 'https://menucard.ddev.site/'
+    condition: 'applicationContext == "Development"'
 dependencies:
   - menucardvendor/menucardpackage
 errorHandling:
